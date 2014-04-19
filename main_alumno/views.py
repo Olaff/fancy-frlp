@@ -16,7 +16,9 @@ from django_tables2   import RequestConfig
 @login_required(login_url='/login/')
 def index(request):
 	carreras = Carrera.objects.all()
-	return render_to_response('index.html', {'carreras': carreras}, context_instance=RequestContext(request))
+	comisiones = Comision.objects.all()
+	template_vars = {'carreras': carreras, 'comisiones': comisiones}
+	return render_to_response('index.html', template_vars, context_instance=RequestContext(request))
 	
 #VISTAS PARA LOGOUT 
 def logout_user(request):
@@ -72,7 +74,7 @@ def edit_catedra(request, id):
 			form.save()
 			messages.success(request,'Catedra modificada satisfactoriamente')
 			carrera = instance.carrera
-			url = reverse('catedra_list' ,args=[carrera])
+			url = reverse('catedra_list')
 			return HttpResponseRedirect(url)
 					
 	template_vars = {'form': form}
@@ -132,6 +134,21 @@ def add_comision(request):
 		
 	template_vars = {'form': form} #Variable que le paso al contexto
 	return render_to_response('add_comision.html', template_vars, context_instance=RequestContext(request))
+	
+@permission_required('empleados.can_edit')
+@login_required(login_url='/login/')
+def edit_comision(request, id):
+	instance = get_object_or_404(Comision, id=id)
+	form = ComisionForm(request.POST or None , request.FILES, instance=instance)
+	if form.is_valid():
+			form.save()
+			messages.success(request,'Comisión modificada satisfactoriamente')
+			carrera = instance.carrera
+			url = reverse('comision_list',args=[carrera])
+			return HttpResponseRedirect(url)
+					
+	template_vars = {'form': form}
+	return render_to_response('edit_comision.html', template_vars, context_instance=RequestContext(request)) 
 
 @login_required(login_url='/login/')	
 def comision_list(request): #Lista todas las comisiones, por ahora

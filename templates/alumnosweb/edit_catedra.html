@@ -15,46 +15,12 @@
 <div class="container">
   	 <div class="row-fluid">  	 
 		<div class="well clearfix" style="border-radius:5%;">
-			<form class="form-horizontal" name="AgregarCatedra" method="post">{% csrf_token %}
-			 <fieldset>
-			    <legend>Modifique los datos de la cátedra </legend>
-			        {% for field in form %}
-			        	{% if field.errors %}
-         				       <div class="col-sm-6 control-group error">
-                					<label class="col-sm-4 control-label">{{ field.label }}</label> 
-                					<div class="col-sm-8 controls">{{ field }}
-            					            <span class="help-inline">
-          				                  {% for error in  field.errors %}{{ error }}{% endfor %}
-                					    </span>
-                                                        </div>
-                                                </div>
-                                        {% else %}
-        					{% if  forloop.counter|divisibleby:2 %}
-        					<div class="col-lg-6 form-group">
-              				  	      <label class="col-lg-4  control-label">{{ field.label }}</label> 
-                    				      <div class="col-lg-3 controls">{{ field }}
-                     					   {% if field.help_text %}
-                				          <p class="help-inline"><small>{{ field.help_text }}</small></p>
-                        			           {% endif %}
-                    				      </div>
-                				</div>
-                				{% else %}
-                				<div class="col-lg-6 form-group">
-              				  	      <label class="col-lg-4  control-label">{{ field.label }}</label> 
-                    				      <div class="col-lg-3 controls">{{ field }}
-                     					   {% if field.help_text %}
-                				          <p class="help-inline"><small>{{ field.help_text }}</small></p>
-                        			           {% endif %}
-                    				      </div>
-                				</div>
-                				{% endif %}
-            				{% endif %}
-                		{% endfor %}
-                	 </fieldset>
-    				<div class="pull-right form-actions">
-        				<button type="submit" class="btn btn-primary" > Guardar </button>
-    				</div>
-			</form>
+			<div class="well clearfix" style="border-radius:5%;">
+
+			{% csrf_token %}
+			{% crispy form %}
+			
+		</div>
 		</div>
 	</div>
 </div>

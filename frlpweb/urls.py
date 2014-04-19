@@ -21,7 +21,8 @@ urlpatterns = patterns('',
 	url(r'^catedra/(?P<id_catedra>\d+)/edithorario/$', 'main_alumno.views.add_horario', name='edit_horario'),	
 	#URLS PARA GESTION DE COMISIONES
 	url(r'^comision/addcomision/$', 'main_alumno.views.add_comision', name='add_comision'),
-	url(r'^comision/lista_comisiones', 'main_alumno.views.comision_list', name='comision_list'),
+	url(r'^comision/editar/(?P<id>\d+)/$', 'main_alumno.views.edit_comision', name='comision_edit'),
+	url(r'^comision/lista_comisiones/$', 'main_alumno.views.comision_list', name='comision_list'),
 	#URLS PARA GESTION DE ALUMNOS 
 	url(r'^addalumno/$', 'main_alumno.views.add_alumno', name='add_alumno'),
 	url(r'^alumno/editar/(?P<id>\d+)/$', 'main_alumno.views.edit_alumno', name='alumno_edit'),

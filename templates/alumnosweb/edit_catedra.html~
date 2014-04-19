@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-<!-- Este template modela el formulario para modificar la cátedra -->
+<!-- Este template modela el formulario para modificar la cátedra seleccionada desde la lista de cátedras -->
 {% block title %} Modificar Cátedra {% endblock %}
 
 {% block header %}

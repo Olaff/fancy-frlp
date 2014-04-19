@@ -16,10 +16,29 @@
 	{% endblock %}
 	
 {% block content %}
-	{% for comision in comisiones %}
-		<h4>Comision: {{comision.numero}} </h4>
-		Turno: {{comision.turno}} <br>
-		Nivel: {{comision.nivel}} <br>
-		Carrera: {{comision.carrera}}
-	{% endfor %}	
+<div class="container">
+  	 <div class="row-fluid">  
+  	 {% regroup comisiones|dictsort:"carrera" by carrera as comisiones_list%}
+  	 	{% for comision in comisiones_list %}
+  	 	 <div class="col-lg-5 control-group">
+  	 	 	<div class="panel panel-info">
+  		 		<div class="panel-heading">
+  		 		 <strong>Comisiones de {{ comision.grouper|title }}  </strong></div>
+  		 		<div class="panel-body">	
+  		 			<ul class="list-group"> 
+  		 				{% for item in comision.list %}
+  		 					<h5 class="list-group-item-heading">  {{item.numero}}</h5>
+							<a  class="list-group-item-text" href="{% url 'catedra_edit' item.id %}"><i class="fa fa-pencil-square"> Editar </a></i>
+	 						<a class="list-group-item-text"  href="{% url 'catedra_details' item.id %}"> <i class="fa fa-info-circle"> Ver detalles </i> </a>
+	 						<a class="list-group-item-text"  href="{% url 'catedra_delete' item.id %}"> <i class="fa fa-times">Eliminar </i> </a>
+ 		 				{% endfor %}
+  		 			</ul>
+  		 		</div>
+  		 	</div>
+  		 </div>
+		{% endfor %}
+			
+	</div>
+</div>
 {% endblock %}
+

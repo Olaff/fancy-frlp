@@ -28,7 +28,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" > Gestión de Comisiones  <span  class="caret"></span> </a>
 							<ul class="dropdown-menu">
 								<li><a name="add_comision" href="{% url 'add_comision' %}"> Agregar comisión </a> </li>
-								<li> <a name="comision_list" href="{% url 'comision_list' %}"> Ver comisiones</a> </li>
+								<li> <a name="comision_list" href="{% url 'comision_list' comisiones.carrera %}"> Ver comisiones</a> </li>
 							</ul>
 						</li>
 						
@@ -68,15 +68,7 @@
 		</div>
 	</div>
 </header>
-	{% block alertmessage %}
-			{% if messages %} 
-    				{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
-              				<div class="alert alert-success">
-              					<span class="text-center"><strong> {{ message }}, {{user.username|title}}   </strong> </span>
-    					</div>
-           			 {% endfor %} 
-			 {% endif %}
-	{% endblock %}
+	
 {% endblock%}
 
 

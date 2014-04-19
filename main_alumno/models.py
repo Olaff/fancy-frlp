@@ -43,7 +43,7 @@ class Comision(models.Model):
 	
 	
 	def __unicode__(self):
-		return smart_unicode(self.numero)
+		return smart_unicode(self.numero) + smart_unicode(self.turno)
 		
 class Catedra(InfoCatedra):
 	nivel = models.CharField(max_length=2) 

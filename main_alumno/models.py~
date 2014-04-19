@@ -1,6 +1,5 @@
 #-*-encoding:utf-8 -*-
 from django.db import models
-from django import forms
 from datetime import date
 from django.contrib.admin import widgets    #Para Widgets en campos fecha
 from django_extensions.db.fields import AutoSlugField
@@ -44,7 +43,7 @@ class Comision(models.Model):
 	
 	
 	def __unicode__(self):
-		return smart_unicode(self.numero)
+		return smart_unicode(self.numero) + return smart_unicode(self.turno)
 		
 class Catedra(InfoCatedra):
 	nivel = models.CharField(max_length=2) 
@@ -89,7 +88,7 @@ class Horario(models.Model):
 class  Alumno(models.Model):
 	apellido = models.CharField(max_length=30, verbose_name="Apellido")
 	nombres = models.CharField(max_length=50, verbose_name="Nombres")
-	fecha_nacimiento = models.DateField(widget=forms.DateInput(format = '%d.%m.%Y'),verbose_name="Fecha de Nacimiento")
+	fecha_nacimiento = models.DateField(verbose_name="Fecha de Nacimiento")
 	dni= models.CharField(max_length=8, null=False, verbose_name="DNI")
 	lugar = models.CharField(max_length=50, help_text="Lugar de nacimiento")
 	domicilio = models.CharField(max_length=50)
