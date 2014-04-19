@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' > {% endblock %}
+
+	{% block header %}
+		{% include 'index.html' %}
+		{% block alertmessage %}
+			{% if messages %} 
+    				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+              				<div class="alert alert-warning">
+    						<strong>{{ message }}  </strong> 
+    					</div>
+           			 {% endfor %} 
+			 {% endif %}
+		{% endblock %}
+	{% endblock %}
+	
+{% block content %}
+	
+	<div class="well">
+		 		Cada panel corresponde a una carrera almacenada en el sistema y dictada por la facultad. Contienen las acciones para mostrar la cantidad de alumnos inscriptos, el plan de estudio y las incumbencias profesionales.
+	</div>
+	<div class="container">
+	  	 <div class="row-fluid">  
+	  	 	{% for carrera in carreras %}
+	  	 	<div class="col-lg-6 control-group">
+	  		 	<div class="panel panel-default">
+	  				<div class="panel-heading"> 
+	  					<h4>{% if  "sistema" in carrera.nombre %} 
+	  						Ingeniería  en {{carrera.nombre|title}} de Información
+	  					{% else %}
+	  						Ingeniería {{carrera.nombre|title}}
+	  					{% endif %}</h4>
+	  				</div>
+	  				<div class="panel-body">	
+	  					<ul class="list-group"> 
+	  							<a class="list-group-item" href="{% url 'edit_carrera' carrera.id %}">
+	  								<h5 class="list-group-item-heading"><i class="fa fa-pencil-square"> Editar </i></h5>
+									<small class="list-group-item-text"> Pulse aquí para editar la información de la carrera </small>
+								</a>
+		  						<a  class="list-group-item" href="{% url 'carrera_details' carrera.id %}">
+		  							<h5 class="list-group-item-heading"> <i class="fa fa-info-circle"> Ver detalles</i> </h5>	
+									<small class="list-group-item-text">Permite ver el plan de estudio, título intermedio e incumbencias profesionales</small>
+								
+								</a>
+								 <a  class="list-group-item"" href="#">
+									<h5 class="list-group-item-heading"> <i class="fa fa-male"> Ver alumnos inscriptos </i></h5>
+									<small class="list-group-item-text">Permite ver la cantidad de alumnos inscriptos en una carrera </small>
+								</a>
+			 				
+						</ul>
+  					</div>
+  				</div>
+			</div>
+			{% endfor %} 
+		</div>
+	</div>
+	
+		
+	
+{% endblock%}

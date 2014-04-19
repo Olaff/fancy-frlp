@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximun-scale=1">
+	<title>{% block title %}{% endblock %} </title>
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/sidebar.css' />
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/bootstrap.min.css' />
+	{%block customcss %} {% endblock%}
+	 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> <!-- FontAwesome para tirar íconos -->
+</head>
+
+
+{% block header %} 
+	{%block alertmessage %} {% endblock %}
+{% endblock %}
+
+	<body>
+	
+    		{% block  content %}
+			
+		{% endblock %}
+		<footer id="footer" class="footer navbar-fixed-bottom">
+			<div class="text-center">   				  
+				     <h5 class="text-muted">&copy; 2014 Olaff_ - Django.</h5>
+			</div>    			
+    		</footer>
+		
+		
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.min.js"> </script>
+		
+		{% block customjs %} {% endblock %} 
+	</body>
+</html>

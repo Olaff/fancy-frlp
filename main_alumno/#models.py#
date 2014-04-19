@@ -1,0 +1,101 @@
+#-*-encoding:utf-8 -*-
+from django.db import models
+from datetime import date
+from django.contrib.admin import widgets    #Para Widgets en campos fecha
+from django_extensions.db.fields import AutoSlugField
+from django.utils.translation import gettext as _
+from django.contrib.auth.signals import user_logged_in, user_logged_out  
+from django.utils.encoding import smart_unicode
+
+class InfoCatedra(models.Model):
+	nombre = models.CharField(max_length=50, verbose_name='Nombre')
+	nivel = models.CharField(max_length=2)
+	jefe_catedra = models.CharField(max_length=50, verbose_name='Jefe de cátedra')
+	jtp = models.CharField(max_length=50, verbose_name='Jefe de Trabajos Prácticos', blank=True)
+	slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('nombre',))
+	
+	def __unicode__(self):
+		return smart_unicode(self.nombre)
+				
+	class Meta:
+        	abstract = True
+        	ordering = ['-nombre']
+  	
+#CLASES CONCRETAS 
+
+class Carrera(models.Model):
+	nombre = models.CharField(max_length=50, verbose_name='Nombre de la carrera',help_text="Ingresar sólo la especialidad, sin tildes")
+	tit_intermedio = models.CharField(max_length=50, verbose_name='Título intermedio', help_text='Puede dejarse en blanco', blank=True)
+	planestudio = models.FileField(upload_to='alumnosweb/', blank='True', verbose_name="Plan de Estudio")
+	slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('nombre',))
+	
+	def __unicode__(self):
+		return smart_unicode(self.nombre)
+	
+class Comision(models.Model):
+	numero = models.CharField(max_length=100, default='',  verbose_name="Nº Comisión", help_text="Ingrese el numero de la comisión")
+	turno = models.CharField(max_length=100, default='',  verbose_name="Turno", help_text="Ingrese el turno de la comisión") 
+	nivel = models.CharField(max_length=2) #Uso interno, no se muestra al usuario 
+	carrera = models.ForeignKey('Carrera') 
+
+	catedra = models.ForeignKey('Catedra')
+	
+	def __unicode__(self):
+		return smart_unicode(self.numero)
+		
+class Catedra(InfoCatedra):
+	bool_choices = ((True, 'Sí'), (False, 'No'))	
+	electiva = models.BooleanField(default ='', choices = bool_choices)	
+	carrera = models.ForeignKey('Carrera', default='')
+	sylabus = models.FileField(upload_to='alumnosweb/', blank=True)
+	
+#class CatedraComision(models.Model): 
+##Esta clase es la tabla intermedia entre Comision y Catedras, por tener una relacion muchos a muchos; para crear varias comisiones en la misma cátedra, se instancia este modelo.
+#	comision = models.ForeignKey('Comision')
+#	catedra = models.ForeignKey('Catedra')
+#	maniana, tarde, noche = 'maniana', 'tarde', 'noche'
+#	opt_turno = (
+#		(maniana, 'Mañana'),
+#		(tarde, 'Tarde'),
+#		(noche, 'Noche'),
+#	)
+#	lunes, martes, miercoles, jueves, viernes, sabado = 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'
+#	opciones = (
+#		(lunes, 'Lunes'),
+#		(martes, 'Martes'),
+#		(miercoles, 'Miercoles'),
+#		(jueves, 'Jueves'),
+#		(viernes, 'Viernes'),
+#		(sabado, 'Sábado'),
+#	)
+#	prof_t = models.CharField(max_length=100, default='', verbose_name="Profesor de Teoría")
+#	prof_p = models.CharField(max_length=100, default='', verbose_name="Profesor de Práctica")
+#	ayudantes = models.CharField(max_length=50, verbose_name='Ayudantes', blank=True ,help_text='Separar con coma')
+#	dia_t = models.CharField(max_length=10,  default='', choices = opciones, verbose_name="Día teórica")	
+#	dia_p = models.CharField(max_length=10, blank=True, default='', choices = opciones, verbose_name="Día práctica")	
+#	hora_inicio_t = models.TimeField(null=True, verbose_name='Inicio teórica', help_text="HH:MM") 
+#	hora_fin_t = models.TimeField(null=True, verbose_name='Fin teórica',help_text="HH:MM")	
+#	hora_inicio_p = models.TimeField(null=True, blank=True, verbose_name='Inicio práctica', help_text="HH:MM")	
+#	hora_fin_p = models.TimeField(null=True, blank=True, verbose_name="Fin  práctica", help_text="HH:MM")
+		
+class  Alumno(models.Model):
+	apellido = models.CharField(max_length=30, verbose_name="Apellido")
+	nombres = models.CharField(max_length=50, verbose_name="Nombres")
+	fecha_nacimiento = models.DateField()
+	dni= models.CharField(max_length=8, null=False)
+	lugar = models.CharField(max_length=50, help_text="Lugar de nacimiento")
+	domicilio = models.CharField(max_length=50, help_text="Domicilio actual")
+	localidad = models.CharField(max_length=25, help_text="Localidad actual")
+	telefono = models.CharField(max_length=20, help_text="Teléfono de línea")
+	celular = models.CharField(max_length=20)	
+	legajo = models.CharField(max_length=50, unique=True)	
+	mail = models.EmailField()
+	slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('apellido',))
+	
+	def __unicode__(self):
+		return smart_unicode(self.apellido)
+	carrera = models.ForeignKey('Carrera')
+	        
+        
+class Cursada(models.Model):
+	pass

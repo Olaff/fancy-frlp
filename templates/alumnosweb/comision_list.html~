@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' > {% endblock %}
+
+	{% block header %}
+		{% include 'index.html' %}
+		{% block alertmessage %}
+			{% if messages %} 
+    				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+              				<div class="alert alert-warning">
+    						<strong>{{ message }}  </strong> 
+    					</div>
+           			 {% endfor %} 
+			 {% endif %}
+		{% endblock %}
+	{% endblock %}
+	
+{% block content %}
+	{% for comision in comisiones %}
+		<h4>Comision: {{comision.numero}} </h4>
+		Turno: {{comision.turno}} <br>
+		Nivel: {{comision.nivel}}
+		Carrera: {{comision.carrera}}
+	{% endfor %}	
+{% endblock %}

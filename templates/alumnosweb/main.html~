@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block header %} Bienvenido a AlumnosWeb 
+	<ul class="nav nav-tabs">
+		<li><a href="#">Sign Up</a> </li>
+		<li><a href="login">Login</a> </li>
+		<li><a href="addcatedra"> Agregar Cátedra </a> </li>
+		<li><a href="addalumno"> Agregar Alumno </a></li>
+		<li><a href="alumnos"> Listado de Alumnos </a></li>
+  		<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/catedras/nivel"> Cátedras por nivel <span class="caret"></span> </a>
+  			<ul class="dropdown-menu">
+  				<li> <a href="nivel/primero"> Primer Año </a></li>
+				<li> <a href="nivel/segundo"> Segundo Año  </a></li>
+				<li> <a href="nivel/tercero"> Tercer Año  </a></li>
+				<li> <a href="nivel/cuarto"> Cuarto Año </a></li>
+				<li> <a href="nivel/quinto"> Quinto Año  </a></li>
+			</ul>
+		</li>
+		
+  		<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> Carreras <span class="caret"></span></a> <!-- menu desplegable  --> 
+			<ul class="dropdown-menu"> 
+				<li> <a href="sistemas"> Ingeniería en Sistemas </a></li>
+				<li> <a href="civil"> Ingeniería Civil </a></li>
+				<li> <a href="industrial"> Ingeniería Industrial </a></li>
+				<li> <a href="mecanica"> Ingeniería Mecánica </a></li>
+				<li> <a href="quimica"> Ingeniería Química </a></li>
+				<li> <a href="electrica"> Ingeniería Eléctrica </a></li>
+			</ul>
+		</li>
+		
+	</ul>
+{% endblock %}
+
+
+	{% block content %}
+	
+
+ 	
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	 
+
+		<div class="col-lg-4 control-group">
+  		  <div class="panel panel-info">
+  		 	 <div class="panel-heading"> <strong>Catedras de {{catedra.nivel}}º nivel </strong></div>
+  				<div class="panel-body">
+  				{% for catedra in catedras|dictsort:"nivel" %}	
+  					<ul class="list-group"> 
+  						<h5 class="list-group-item-heading">  {{catedra.nombre }} </h5>
+						<a  class="list-group-item-text" href="{% url 'catedra_edit' catedra.id %}"><i class="fa fa-pencil-square"> Editar </a></i>
+	 					<a class="list-group-item-text"  href="{% url 'catedra_details' catedra.id %}"> <i class="fa fa-info-circle"> Ver detalles </i> </a>
+	 					<a class="list-group-item-text"  href="{% url 'catedra_delete' catedra.id %}"> <i class="fa fa-times">Eliminar </i> </a>
+	 				</ul>
+	 				{% endfor %}
+  				</div>
+  				
+		 </div>
+		</div>
+
+	
+{% endblock %}

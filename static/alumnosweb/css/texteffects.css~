@@ -1,0 +1,30 @@
+/*Mediante esta hoja de estilos cargo los efectos para las fuentes y textos de la aplicación de Alumnos*/
+
+.main-title {
+	text-shadow: 3px 3px 5px #4682B4;
+	background-image: -webkit-gradient(
+	linear,
+	left top, left bottom,
+	from(rgba(0, 0, 0, 1)),
+	to(rgba(0, 0, 0, 0.2))
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+      }
+      
+h4,h5 .part-title {
+	text-shadow: 3px 3px 4px #A9A9A9;
+}
+
+/* Esto es para mostrar ciertos links */
+.active {
+   pointer-events: none;
+   cursor: default;
+}
+
+em {
+	color: red;
+}
+
+
+

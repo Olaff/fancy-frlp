@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de cátedras {% endblock %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' /> {% endblock %}
+
+
+{% block header %}
+	{% include 'index.html' %}
+	
+	{% block alertmessage %}
+	{% if messages %} 
+    				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+              				<div class="alert alert-warning">
+    						<strong>{{ message }}  </strong> 
+    					</div>
+           			 {% endfor %} 
+	 {% endif %}
+	{% endblock %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	 <div class="row-fluid">  
+  	 {% regroup catedras|dictsort:"nivel" by nivel as catedras_list%}
+  	 	{% for catedra in catedras_list %}
+  	 	 <div class="col-lg-5 control-group">
+  	 	 	<div class="panel panel-info">
+  		 		<div class="panel-heading"> <strong>Catedras de {{ catedra.grouper }}º nivel </strong></div>
+  		 		<div class="panel-body">	
+  		 			<ul class="list-group"> 
+  		 				{% for item in catedra.list|dictsort:"electiva" %}
+  		 					<h5 class="list-group-item-heading">  {{item.nombre }} {% if item.electiva %}  <em>  Electiva </em> {% endif %}</h5>
+							<a  class="list-group-item-text" href="{% url 'catedra_edit' item.id %}"><i class="fa fa-pencil-square"> Editar </a></i>
+	 						<a class="list-group-item-text"  href="{% url 'catedra_details' item.id %}"> <i class="fa fa-info-circle"> Ver detalles </i> </a>
+	 						<a class="list-group-item-text"  href="{% url 'catedra_delete' item.id %}"> <i class="fa fa-times">Eliminar </i> </a>
+ 		 				{% endfor %}
+  		 			</ul>
+  		 		</div>
+  		 	</div>
+  		 </div>
+		{% endfor %}
+			
+	</div>
+</div>
+{% endblock %}
+
+
+  		  
+  		 	 
+  				
+  					
+  						
+	 				
+	 				
+  				
+		 
+	

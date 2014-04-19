@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+<!-- Este template modela el formulario para modificar la cátedra seleccionada desde la lista de cátedras -->
+{% block title %} Modificar información del alumno {% endblock %}
+
+{% block header %}
+		<ol class="breadcrumb">
+  			<li><a href="#">Inicio</a></li>
+  			<li><a href="/catedra/lista_alumnos"> Lista de alumnos  </a> </li>
+  			<li class="active">Modificar información del alumno </li>
+		</ol>
+	
+{% endblock %}
+
+{% block content %}
+<div class="container">
+   <div class="row-fluid">  	 
+		<div class="well clearfix" style="border-radius:5%;">
+			<form class="form-horizontal" name="AgregarAlumno" method="post">{% csrf_token %}
+   				 <fieldset class="fieldset">
+				        <legend id=""> Ingrese los datos del nuevo alumno </legend>
+			        {% for field in form %}
+                            		 {% if  not forloop.counter|divisibleby:2 %}
+           					<div class="col-lg-6 form-group">
+                   					 <label class="col-lg-4 control-label">{{ field.label }}</label> 
+                					 <div class="controls">{{ field }}
+                       						 {% if field.help_text %}
+                 				                <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                 	      					 {% endif %}
+                					 </div>
+               				        </div>
+               				  {% else %}
+               				  	<div class="col-lg-6 form-group">
+                   					 <label class="col-lg-4  control-label">{{ field.label }}</label> 
+                					 <div class="controls">{{ field }}
+                       						 {% if field.help_text %}
+                 				                <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                 	      					 {% endif %}
+                					 </div>
+               				        </div>
+               				 {% endif %}
+               				 	
+        	<!-- Agregar comportamiento y CSS para errores de validación -->
+ 			       {% endfor %}
+ 				   </fieldset>
+ 				<div class="pull-right form-actions">
+       					 <button type="submit" class="btn btn-primary" > Guardar </button>
+   				 </div>
+			</form>
+		</div>
+	</div>	
+</div>
+{% endblock %}

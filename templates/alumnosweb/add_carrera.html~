@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Agregar una nueva carrera {% endblock %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
+ {% block header %}
+ 	{% include 'index.html' %}
+ {% endblock %}
+{% block content %}
+<div class="container">
+   <div class="row-fluid">  	 
+		<div class="well clearfix" style="border-radius:5%;">
+			<form class="form-horizontal" name="AgregarAlumno" method="post">{% csrf_token %}
+   				 {{form|crispy}}
+ 				<div class="pull-right form-actions">
+       					 <button type="submit" class="btn btn-primary" > <i class="fa fa-check"></i> Guardar </button>
+   				 </div>
+			</form>
+		</div>
+	</div>	
+</div>
+{% endblock %}

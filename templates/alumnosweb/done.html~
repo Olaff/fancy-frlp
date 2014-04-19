@@ -1,0 +1,19 @@
+<!--ESTE TEMPLATE MODELA EL DONE DEL FORMWIZARD DE CÁTEDRAS -->
+{% extends 'base.html' %}
+{% block header %}
+	{% block alertmessage %}
+		{% if messages %} 
+    				{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+              				<div class="alert alert-warning">
+    						<strong>{{ message }}  </strong> 
+    					</div>
+           			 {% endfor %} 
+	 	{% endif %}
+	{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'index' %}"> Volver al inicio </a>
+{% endblock %}
+

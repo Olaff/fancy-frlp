@@ -1,0 +1,23 @@
+<!--ESTE TEMPLATE ES PARA EL TERCER  PASO DEL FORMULARIO DE ALTA DE CÁTEDRAS. DEVUELVE LOS DATOS DE COMISION-->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Agregar comisiones  {% endblock %}
+	{% block header %} 
+	{% include 'index.html' %}
+		<ol class="breadcrumb">
+  			<li><a href="{% url 'index' %}">Inicio</a></li>
+  			<li class="active">Agregar Comisión </li>
+		</ol>
+	{% endblock %}
+	
+{% block content %}
+
+<div class="container">
+  	 <div class="row-fluid"> 
+  	  <div class="well clearfix">
+			{% csrf_token %}
+			{% crispy form %}
+	</div>
+</div>
+{% endblock %}
+
