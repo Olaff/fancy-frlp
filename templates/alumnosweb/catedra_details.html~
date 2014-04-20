@@ -16,8 +16,6 @@
 				<div class="panel panel-info">
 					<div class="panel-heading"><h4>Información de la cátedra</h4> </div>
 					<div class="panel-body">
-						<h5> Jefe de Cátedra: </h4>
-							<h6 class="text-center"><p><strong> {{catedra.jefe_catedra}}</strong></p></h6>	
 						<dl class="dl-horizontal">
 							  			<dt class="part-title"> Jefe de Cátedra:</dt>
 							  			<dd><p><strong>{{catedra.jefe_catedra}}</strong></p></dd>
@@ -28,8 +26,8 @@
    						</dl>
 					</div>
 					<div class="panel-footer">
-						<a href="#" class="list-group-item"> 
-							<strong> Sitio web: </strong>
+						<a href="{{catedra.sitio}}" class="list-group-item"> 
+							<strong> Sitio web:  </strong>{{catedra.sitio}}
 						</a>
 					</div>
 				</div>

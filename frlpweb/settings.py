@@ -55,6 +55,11 @@ INSTALLED_APPS = (
     'django_extensions',
     'django_tables2',
     'main_alumno',
+    'comision',
+    'carrera',
+    'catedra',
+    'horario',
+    
 )
 
 MIDDLEWARE_CLASSES = (

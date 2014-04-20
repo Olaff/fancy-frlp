@@ -1,0 +1,11 @@
+#Models for Cursada
+from django.db import models
+       
+class Cursada(models.Model):
+	cursando, aprobado, libre = 'cursando','aprobado','libre'
+	options = (
+		(cursando, 'Cursando'),
+		(aprobado, 'Aprobado'),
+		(libre , 'Libre'),
+	)
+	estado = models.CharField(max_length=20, default='' ,verbose_name="Estado", choices = options)

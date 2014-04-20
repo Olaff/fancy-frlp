@@ -20,75 +20,7 @@ class LoginForm(AuthenticationForm):
             		Field('password', placeholder="Contraseña"),
         	)
 	
-class CatedraForm(ModelForm):
-	def __init__(self, *args, **kwargs): #Reimplemento el constructor 
-        	super(CatedraForm, self).__init__(*args, **kwargs) #Llamo al padre
-		# Customizo mensaje de error para todos los campos del formulario 
-        	for field in self.fields.values():
-           		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label)}
-           	#CrispyForms
-           	self.helper = FormHelper(self)
-           	self.helper.form_class = 'form-horizontal'
-           	self.helper.label_class = 'col-sm-2'
-		self.helper.field_class = 'col-lg-4'
-		self.helper.help_inline = True
-		self.helper.layout = Layout(
-			Fieldset(
-					'Ingrese los datos de la catedra',
-					'nombre',
-					'carrera',
-					'nivel',
-					'electiva',
-					'sylabus',
-					'jefe_catedra',
-					'jtp',
-			),
-			FormActions(
-    					Submit('submit', 'Guardar'),
-    					HTML('<input type="reset" name="reset" value="Borrar"/>'),
-    					HTML("""<a class="btn btn-default" href="{% url 'index' %}">Cancelar</a>"""),
-    					css_class = 'pull-right',
-			),
-		)
-           	
-           	
-	class Meta:
-		model = Catedra #Conecta los campos del modelo para generar los del formulario
-		exclude = ["slug", "comisiones"]	 #Excluyo comisiones porque la relacion se guarda en la vista del formset 	
 	
-	
-           	
-class ComisionForm(ModelForm):
-	class Meta:
-		model = Comision 
-		
-	def __init__(self, *args, **kwargs): #Reimplemento el constructor 
-        	super(ComisionForm, self).__init__(*args, **kwargs) #Llamo al padre
-		# Customizo mensaje de error para todos los campos del formulario 
-        	for field in self.fields.values():
-           		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label)}
-           	self.helper = FormHelper(self)
-           	self.helper.form_class = 'form-horizontal'
-           	self.helper.label_class = 'col-lg-2'
-		self.helper.field_class = 'col-lg-4'
-		self.helper.help_inline = True
-           	self.helper.layout= Layout (
-           		Fieldset(
-           			'Ingrese una nueva comision',
-           			Field('numero', label='Número', placeholder='Ingrese el numero de la comisión'),
-           			Field('nivel', label='Nivel', placeholder='Ingrese el nivel al que pertenece comisión'),
-           			Field('turno', label='Turno', placeholder='Ingrese el turno de la comisión'),
-           			Field('carrera', label='Carrera', placeholder='Elija una carrera'),
-           			
-           		),
-           		
-           	        FormActions(
-    				Submit('submit', 'Guardar'),
-    				HTML('<input type="reset" class="btn" name="reset" value="Borrar"/>'),
-    				HTML("""<a class="btn btn-default" href="{% url 'index' %}">Cancelar</a>"""),
-    				css_class = 'pull-right',
-			),
-		)
 
 class HorarioForm(ModelForm):
 	class Meta:
@@ -170,41 +102,16 @@ class AlumnoForm(ModelForm):
 					'carrera',
 					'legajo',
 					css_class='col-sm-6',
-				)
+				),
+				FormActions(
+    					Submit('submit', 'Guardar'),
+    					HTML('<input type="reset" class="btn" name="reset" value="Borrar"/>'),
+    					HTML("""<a class="btn btn-default" href="{% url 'index' %}">Cancelar</a>"""),
+    					css_class = 'pull-right',
+			),
 			),
 			
 		)
 
-class CarreraForm(ModelForm):
-	def __init__(self, *args, **kwargs): #Reimplemento el constructor 
-        	super(CarreraForm, self).__init__(*args, **kwargs) #Llamo al padre
-		# Customizo mensaje de error para todos los campos del formulario 
-        	for field in self.fields.values():
-           		field.error_messages = {'required':'Este campo obligatorio'.format(fieldname=field.label)}
-		#CrispyForms
-		self.helper = FormHelper(self)
-           	self.helper.form_class = 'form-horizontal'
-           	self.helper.label_class = 'col-lg-2'
-		self.helper.field_class = 'col-lg-4'
-		self.helper.help_inline = True
-           	self.helper.layout= Layout (
-           		Fieldset(
-           			'Ingrese una nueva carrera',
-           			'nombre',
-           			'tit_intermedio',
-           			'planestudio',
-           			Field('year', label='Año', placeholder='Año del plan de estudios'),
-           		),
-           		
-           	        FormActions(
-    				Submit('submit', 'Guardar'),
-    				HTML('<input type="reset" class="btn" name="reset" value="Borrar"/>'),
-    				HTML("""<a class="btn btn-default" href="{% url 'index' %}">Cancelar</a>"""),
-    				css_class = 'pull-right',
-			),
-		)
-	
-	class Meta:
-		model = Carrera
-		exclude= ["slug"]
+
 	
