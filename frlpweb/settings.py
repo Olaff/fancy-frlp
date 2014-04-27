@@ -1,3 +1,5 @@
+# -*-encoding:utf-8-*-
+
 """
 Django settings for frlpweb project.
 
@@ -7,11 +9,12 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
-# -*-encoding:utf-8-*-
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import sys
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+sys.path.insert(1, os.path.join(PROJECT_ROOT, "apps"))
 
 DEFAULT_CHARSET = 'utf-8' 
 FILE_CHARSET = 'utf-8' 
@@ -54,11 +57,12 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_extensions',
     'django_tables2',
-    'main_alumno',
-    'comision',
-    'carrera',
-    'catedra',
-    'horario',
+    'apps.main_alumno',
+    'apps.comision',
+    'apps.carrera',
+    'apps.catedra',
+    'apps.horario',
+    'apps.users',
     
 )
 
@@ -111,7 +115,7 @@ STATICFILES_DIRS = (
 )
 # Templates para Alumnos
 TEMPLATE_DIRS = (
-	os.path.join ( PROJECT_ROOT, 'templates', 'alumnosweb'),
+	os.path.join ( PROJECT_ROOT, 'templates'),
 )
 
 # Subida de archivos para Alumnos
