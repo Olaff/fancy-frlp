@@ -1,7 +1,7 @@
 #URLS for Catedra
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from carrera.models import Catedra
+from apps.catedra.models import Catedra
 admin.autodiscover()
 
 urlpatterns = patterns('catedra.views',

@@ -31,9 +31,9 @@
   		 			<ul class="list-group"> 
   		 				{% for item in catedra.list|dictsort:"electiva" %}
   		 					<h5 class="list-group-item-heading">  {{item.nombre }} {% if item.electiva %}  <em>  Electiva </em> {% endif %}</h5>
-							<a  class="list-group-item-text" href="{% url 'catedra_edit' item.id %}"><i class="fa fa-pencil-square"> Editar </a></i>
-	 						<a class="list-group-item-text"  href="{% url 'catedra_details' item.id %}"> <i class="fa fa-info-circle"> Ver detalles </i> </a>
-	 						<a class="list-group-item-text"  href="{% url 'catedra_delete' item.id %}"> <i class="fa fa-times">Eliminar </i> </a>
+							<a  class="list-group-item-text" href="{% url 'catedras:catedra_edit' item.id %}"><i class="fa fa-pencil-square"> Editar </a></i>
+	 						<a class="list-group-item-text"  href="{% url 'catedras:catedra_details' item.id %}"> <i class="fa fa-info-circle"> Ver detalles </i> </a>
+	 						<a class="list-group-item-text"  href="{% url 'catedras:catedra_delete' item.id %}"> <i class="fa fa-times">Eliminar </i> </a>
  		 				{% endfor %}
   		 			</ul>
   		 		</div>

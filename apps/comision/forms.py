@@ -36,7 +36,7 @@ class ComisionForm(ModelForm):
            	        FormActions(
     				Submit('submit', 'Guardar'),
     				HTML('<input type="reset" class="btn" name="reset" value="Borrar"/>'),
-    				HTML("""<a class="btn btn-default" href="{% url 'index' %}">Cancelar</a>"""),
+    				HTML("""<a class="btn btn-default" href="{% url 'users:index' %}">Cancelar</a>"""),
     				css_class = 'pull-right',
 			),
 		)

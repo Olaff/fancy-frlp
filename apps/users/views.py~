@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #Views for user handling
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404,render,render_to_response
 from django.core.urlresolvers import reverse

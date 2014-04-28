@@ -10,9 +10,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 from catedra.models import Catedra
 from catedra.forms import CatedraForm
 
-
-
-
 @login_required(login_url='/login/')	
 def ListaCatedras(request, carrera): #Lista todas las cátedras recibiendo  como parámetro el nombre de la carrera para poder generar la lista
 	catedras = Catedra.objects.filter(carrera__nombre__contains=carrera)
@@ -52,7 +49,7 @@ def edit_catedra(request, id):
 			form.save()
 			messages.success(request,'Catedra modificada satisfactoriamente')
 			carrera = instance.carrera
-			url = reverse('catedra_list')
+			url = reverse('catedras:catedra_list', args=[carrera])
 			return HttpResponseRedirect(url)
 					
 	template_vars = {'form': form}
@@ -64,5 +61,5 @@ def delete_catedra(request,id):
 	carrera = catedra.carrera
 	catedra.delete()
 	messages.success(request,'Catedra eliminada con éxito')
-	url = reverse('catedra_list' ,args=[carrera])
+	url = reverse('catedras:catedra_list' ,args=[carrera])
 	return HttpResponseRedirect(url)

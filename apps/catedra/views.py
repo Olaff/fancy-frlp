@@ -33,7 +33,7 @@ def add_catedra(request):
 		if form.is_valid():
 			new_catedra = form.save()
 			messages.success(request,' La catedra fue agregada exitosamente')
-			return HttpResponseRedirect(reverse('catedra_details', args=[new_catedra.id])) #Redirecciona a la vista para agregar los horarios
+			return HttpResponseRedirect(reverse('catedras:catedra_details', args=[new_catedra.id])) #Redirecciona a la vista para agregar los horarios
 	else:
 		form = CatedraForm
 		
@@ -49,7 +49,7 @@ def edit_catedra(request, id):
 			form.save()
 			messages.success(request,'Catedra modificada satisfactoriamente')
 			carrera = instance.carrera
-			url = reverse('catedra_list')
+			url = reverse('catedras:catedra_list', args=[carrera])
 			return HttpResponseRedirect(url)
 					
 	template_vars = {'form': form}
@@ -61,5 +61,5 @@ def delete_catedra(request,id):
 	carrera = catedra.carrera
 	catedra.delete()
 	messages.success(request,'Catedra eliminada con éxito')
-	url = reverse('catedra_list' ,args=[carrera])
+	url = reverse('catedras:catedra_list' ,args=[carrera])
 	return HttpResponseRedirect(url)

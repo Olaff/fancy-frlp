@@ -34,16 +34,16 @@
 	  				</div>
 	  				<div class="panel-body">	
 	  					<ul class="list-group"> 
-	  							<a class="list-group-item" href="{% url 'edit_carrera' carrera.id %}">
+	  							<a class="list-group-item" href="{% url 'carreras:edit_carrera' carrera.id %}">
 	  								<h5 class="list-group-item-heading"><i class="fa fa-pencil-square"> Editar </i></h5>
 									<small class="list-group-item-text"> Pulse aquí para editar la información de la carrera </small>
 								</a>
-		  						<a  class="list-group-item" href="{% url 'carrera_details' carrera.id %}">
+		  						<a  class="list-group-item" href="{% url 'carreras:carrera_details' carrera.id %}">
 		  							<h5 class="list-group-item-heading"> <i class="fa fa-info-circle"> Ver detalles</i> </h5>	
 									<small class="list-group-item-text">Permite ver el plan de estudio, título intermedio e incumbencias profesionales</small>
 								
 								</a>
-								 <a  class="list-group-item"" href="{% url 'alumno_by_career' carrera.nombre %}">
+								 <a  class="list-group-item"" href="{% url 'alumnos:alumno_by_career' carrera.nombre %}">
 									<h5 class="list-group-item-heading"> <i class="fa fa-male"> Ver alumnos inscriptos </i></h5>
 									<small class="list-group-item-text">Permite ver la cantidad de alumnos inscriptos en una carrera </small>
 								</a>

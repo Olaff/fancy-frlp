@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('carrera.views',
 	url(r'^addcarrera/$','add_carrera', name='add_carrera'),
-	url(r'^carrera/editar/(?P<id>\d+)/$', 'edit_carrera', name='edit_carrera'),
-	url(r'^carrera/lista_carreras', 'carrera_list', name='carrera_list'),
-	url(r'^carrera/(?P<id>\d+)/detalles/$', 'carrera_details', name='carrera_details'),
+	url(r'^editar/(?P<id>\d+)/$', 'edit_carrera', name='edit_carrera'),
+	url(r'^lista_carreras/$', 'carrera_list', name='carrera_list'),
+	url(r'^(?P<id>\d+)/detalles/$', 'carrera_details', name='carrera_details'),
 )

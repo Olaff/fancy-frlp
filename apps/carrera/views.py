@@ -14,7 +14,7 @@ def add_carrera(request):
 		if form.is_valid():
 			new_carrera = form.save()
 			messages.success(request,'Carrera agregada satisfactoriamente')
-			return HttpResponseRedirect('/carrera/lista_carreras')
+			return HttpResponseRedirect('/carreras/lista_carreras')
 	else:
 		form = CarreraForm
 	
@@ -27,7 +27,7 @@ def edit_carrera(request, id):
 	if form.is_valid():
 			form.save()
 			messages.success(request,'Datos de la carrera modificados satisfactoriamente')
-			return HttpResponseRedirect('/carrera/lista_carreras')
+			return HttpResponseRedirect('/carreras/lista_carreras')
 					
 	template_vars = {'form': form}
 	return render_to_response('add_carrera.html', template_vars, context_instance=RequestContext(request))

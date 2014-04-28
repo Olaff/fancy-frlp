@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404,render,render_to_response
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template.context import RequestContext
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from carrera.models import Carrera
 from carrera.forms import CarreraForm
@@ -13,7 +14,7 @@ def add_carrera(request):
 		if form.is_valid():
 			new_carrera = form.save()
 			messages.success(request,'Carrera agregada satisfactoriamente')
-			return HttpResponseRedirect('/carrera/lista_carreras')
+			return HttpResponseRedirect('/carreras/lista_carreras')
 	else:
 		form = CarreraForm
 	

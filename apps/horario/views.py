@@ -1,4 +1,5 @@
 #Views for Horario
+# -*-encoding:utf-8-*-
 from django.shortcuts import get_object_or_404,render,render_to_response
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -6,9 +7,10 @@ from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms.models import inlineformset_factory
 from django.contrib import messages
-from carrera.models import Horario
+from horario.models import Horario
 from catedra.models import Catedra
-from carrera.forms import HorarioForm
+from comision.models import Comision
+from horario.forms import HorarioForm
 
 
 @permission_required('empleados.can_add')
@@ -26,7 +28,7 @@ def add_horario(request, id_catedra): #Recibe el id de catedra que agregue
 			#Envio un mensaje al usuario 
 			messages.success(request,' Datos agregados exitosamente')
 			#redirecciono a la lista de comisiones
-			url = reverse ('catedra_list', args=[catedra.carrera]) #Redirijo a la lista de catedras segun la carrera
+			url = reverse ('catedras:catedra_list', args=[catedra.carrera]) 
 			return HttpResponseRedirect(url)
 	else:
 		formset = HorarioInlineFormSet(instance=catedra)

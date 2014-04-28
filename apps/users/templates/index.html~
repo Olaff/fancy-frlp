@@ -59,7 +59,7 @@
 						</li>
 						<li class="navbar-text"> Bienvenido, <strong>{{user.username|title}} </strong></li>
 						<form class="navbar-form navbar-right">
-								<a href="{% url users:logout %}"> <button type="button" class="btn btn-primary">Salir </button> </a>
+								<a href="{% url 'users:logout' %}"> <button type="button" class="btn btn-primary">Salir </button> </a>
    						 </form>
 					</ul> 
 				</div>

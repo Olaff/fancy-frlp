@@ -1,22 +1,16 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 <!-- Este template modela el formulario para modificar la cátedra seleccionada desde la lista de cátedras -->
 {% block title %} Modificar Cátedra {% endblock %}
-
-{% block header %}
-		<ol class="breadcrumb">
-  			<li><a href="#">Inicio</a></li>
-  			<li><a href="/catedra/lista_catedras"> Lista de Cátedras </a> </li>
-  			<li class="active">Modificar Cátedra  </li>
-		</ol>
-	
-{% endblock %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
+ {% block header %}
+ 	{% include 'index.html' %}
+ {% endblock %}
 
 {% block content %}
 <div class="container">
   	 <div class="row-fluid">  	 
 		<div class="well clearfix" style="border-radius:5%;">
-			<div class="well clearfix" style="border-radius:5%;">
-
 			{% csrf_token %}
 			{% crispy form %}
 			

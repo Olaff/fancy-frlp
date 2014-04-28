@@ -6,19 +6,6 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *
 from crispy_forms.bootstrap import FormActions
 from apps.main_alumno.models import *
-
-class LoginForm(AuthenticationForm):
-	def __init__(self, *args, **kwargs):
-        	super(LoginForm, self).__init__(*args, **kwargs)
-        	self.fields['username'].label = "Usuario"
-        	self.fields['password'].label = "Contraseña"
-        	for field in self.fields.values():
-           		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label)}
-        	self.helper = FormHelper(self)
-        	self.helper.layout = Layout(
-            		Field('username', label="Usuario", placeholder="Nombre de usuario"),
-            		Field('password', placeholder="Contraseña"),
-        	)
 	         		
 class AlumnoForm(ModelForm):
 	class Meta:

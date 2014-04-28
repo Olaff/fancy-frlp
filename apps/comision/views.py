@@ -23,8 +23,7 @@ def add_comision(request):
 			#Envio un mensaje al usuario 
 			messages.success(request,' La comisión fue agregada exitosamente')
 			#redirecciono a la lista de comisiones
-			url = reverse ('comision_list')
-			return HttpResponseRedirect(url)
+			return HttpResponseRedirect('comisiones/comision_list')
 	else:
 		form= ComisionForm() #Para no mostrar las comisiones guardadas, uso objects.none()
 		
@@ -46,8 +45,22 @@ def edit_comision(request, id):
 	template_vars = {'form': form}
 	return render_to_response('edit_comision.html', template_vars, context_instance=RequestContext(request)) 
 
+@login_required(login_url='/login/')
+def comision_delete(request, id):
+	comision = get_object_or_404(Comision, id=id)
+	comision.delete()
+	messages.success(request,'Comision eliminada satisfactoriamente')
+	return HttpResponseRedirect('comisiones/comision_list')
+	
 @login_required(login_url='/login/')	
 def comision_list(request): #Lista todas las comisiones, por ahora
 	comisiones = Comision.objects.all()
 	template_vars = {'comisiones':comisiones}
 	return render_to_response('comision_list.html', template_vars, context_instance=RequestContext(request))
+	
+@login_required(login_url='/login/')
+def comision_detail(request, id):
+	comision = get_object_or_404(Comision, id=id)
+	return render_to_response ('comision_details.html', {'comision':comision}, context_instance=RequestContext(request))
+	
+

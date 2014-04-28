@@ -5,7 +5,7 @@ import django_tables2 as tables
 from django_tables2.utils import A 
 
 class AlumnoTable(tables.Table):
-	nombres = tables.LinkColumn('alumno_details', args=[A('pk')])
+	nombres = tables.LinkColumn('alumnos:alumno_details', args=[A('pk')])
 	fecha_nacimiento = tables.TemplateColumn("{{value|date:'d/m/Y'}}", verbose_name='Fecha de Nacimiento')
 	class Meta:
 		model = Alumno

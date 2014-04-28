@@ -26,7 +26,7 @@ def add_alumno(request):
 		form = AlumnoForm()
 	
 	template_vars = {'form': form}
-	return render_to_response('agregaralumno.html', template_vars, context_instance=RequestContext(request))
+	return render_to_response('add_alumno.html', template_vars, context_instance=RequestContext(request))
 	
 @login_required(login_url='/login/')
 def edit_alumno(request, id):
@@ -38,12 +38,12 @@ def edit_alumno(request, id):
 			return HttpResponseRedirect('/index')
 					
 	template_vars = {'form': form}
-	return render_to_response('edit_alumno.html', template_vars, context_instance=RequestContext(request)) 
+	return render_to_response('alumnos/edit_alumno.html', template_vars, context_instance=RequestContext(request)) 
 	
 @login_required(login_url='/login/')
 def ListaAlumnos(request):
 	alumnos = Alumno.objects.all()
-	return render_to_response('alumno_list.html', {'alumnos': alumnos}, context_instance=RequestContext(request))
+	return render_to_response('alumnos/alumno_list.html', {'alumnos': alumnos}, context_instance=RequestContext(request))
 	
 @login_required(login_url='/login/')
 def alumno_by_career(request, career):

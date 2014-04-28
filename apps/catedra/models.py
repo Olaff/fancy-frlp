@@ -3,6 +3,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from django_extensions.db.fields import AutoSlugField
+from django.utils.encoding import smart_unicode
 
 
 class InfoCatedra(models.Model):

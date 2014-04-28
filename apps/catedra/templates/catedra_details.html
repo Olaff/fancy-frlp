@@ -69,8 +69,8 @@
 					</div>
 					<div class="panel-footer">
 						<div class="btn-group btn-group-justified">
- 							<a class="btn btn-primary" href="{% url 'add_horario' catedra.id %}"> Agregar horario </a>
- 							{%block comment %}<a class="btn btn-primary" href="{% url 'edit_horario' catedra.id %}"> Editar </a>
+ 							<a class="btn btn-primary" href="{% url 'horarios:add_horario' catedra.id %}"> Agregar horario </a>
+ 							{%block comment %}<a class="btn btn-primary" href="{% url 'horarios:edit_horario' catedra.id %}"> Editar </a>
  							<a class="btn btn-default" href="#"> Eliminar </a> {% endblock %}
 						</div>
 					</div>

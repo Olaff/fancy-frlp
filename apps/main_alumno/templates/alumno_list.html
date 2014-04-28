@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 
 {% block title %} Listado de alumnos {% endblock %}
-	{% block header %}
-		<ol class="breadcrumb">
- 			 <li><a href="{% url 'index' %}">Inicio</a></li>
- 			<li class="active" href="{% url 'lista_alumnos' %}"> Listado de Alumnos </li>
-		</ol>
-	{% endblock %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
+{% block header %}
+ 	{% include 'index.html' %}
+ {% endblock %}
 {% block content %}
 	<ul>
     		{% for alumno in object_list %}

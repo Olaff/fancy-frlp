@@ -35,8 +35,7 @@ class CatedraForm(ModelForm):
     					HTML("""<a class="btn btn-default" href="{% url 'index' %}">Cancelar</a>"""),
     					css_class = 'pull-right',
 			),
-		)
-           	
+		)         	
            	
 	class Meta:
 		model = Catedra #Conecta los campos del modelo para generar los del formulario
