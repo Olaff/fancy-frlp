@@ -3,8 +3,21 @@
 {% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' > {% endblock %}
 
 {% block header %}
-	
-	
+	{% block alertmessage %}
+	{% if messages %} 
+    				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+              				<div class="container">
+            					<div class="col-sm-12 pull-left">
+              						<div class="alert alert-info dismissable">
+              							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    								<span class="text-center"><strong>{{ message }}  </strong> </span>
+    							</div>
+    						</div>
+    					</div>
+           			 {% endfor %} 
+	 {% endif %}
+	{% endblock %}
 {% endblock %}
 {% block content %}
 	<div class="page-header" >
@@ -13,27 +26,41 @@
 	<div class="container"> 
 		<div class="row-fluid">
 			<div class="col-lg-6">
-				<div class="panel panel-default"">
-					<div class="panel-heading">
+				<div class="panel panel-primary">
+					<div class="panel-heading text-center">
 						<h4>Información de la cátedra</h4> 
 					</div>
 					<div class="panel-body">
 						
 						<dl class="dl-horizontal">
-							  			<dt> Jefe de Cátedra:</dt>
+							  			<dt> Jefe de Cátedra :</dt>
 							  			<dd><p><strong class="three-dee">{{catedra.jefe_catedra}}</strong></p></dd>
-    										<dt> Jefe de Prácticas:</dt>    										
+    										<dt> Jefe de Prácticas :</dt>    										
    										<dd><p> <strong class="three-dee">{{catedra.jtp}} </strong></p></dd>
-   										<dt>Syllabus</dt>
+   										<dt> Carrera : </dt>
+   										<dd> <p><strong class="three-dee"> {{catedra.carrera|title}}</strong> </p></dd>
+   										<dt> Nivel :</dt>
+   										<dd><p><strong class="three-dee">{{catedra.nivel}}</strong></p></dd>
+   										<dd>
+   											<label class="checkbox-inline">
+    												<input type="checkbox" disabled checked > Obligatoria 
+  											</label> 
+  											<label class="checkbox-inline">
+  												<input type="checkbox" disabled> Electiva
+  											</label>									
+   										<dd>
+   											
+   										</dd>
+   										<dt>Syllabus :</dt>
    										<dd>{{catedra.sylabus}}</dd>
    						</dl>
 					</div>
 					<div class="panel-footer">
 						<dl class="dl-horizontal">
-							<dt>Sitio web: </dt>
+							<dt>Sitio web : </dt>
 							<dd>
-								<a href="{{catedra.sitio}}" class="list-group-item"> 
-									<em>{{catedra.sitio}}</em>
+								<a href="{{catedra.sitio}}" > 
+									{{catedra.sitio}}
 								</a>
 							</dd>
 						</dl>
@@ -41,14 +68,14 @@
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<div class="panel panel-default"">
+				<div class="panel panel-primary">
 					<div class="panel-heading text-center"><h4>Horarios </h4></div>
 					<div class="panel-body">
-						{% for com in catedra.comisiones.all %}					
-							 <span class="list-group-item"><h4 class="list-group-item-heading">Comisión: {{com.numero}}</h4>
+						{% for com in catedra.comisiones.all %}			
+						<div class="list-group-item">		
+							<h4>Comisión {{com.numero}}</h4>
 							 	{% for schedule in com.horarios.all %}
-								  	
-							  		<dl class="dl-horizontal">
+								  	<dl class="dl-horizontal">
 							  			<dt>Turno: </dt>
 							  			<dd> <span class="three-dee">{{com.turno }} </span></dd>
     										<dt >Prof. Teoría:</dt>
@@ -56,7 +83,7 @@
    										<dt>Prof. Práctica: </dt>
    										<dd> <span class="three-dee">{{schedule.prof_p}}</span></dd>
    									</dl>
-							  	<table class="table table-striped table-bordered">
+   								<table class="table table-striped table-bordered">
 							  	  <thead>
     									<tr>
         									<th>Día Teoría</th>        								
@@ -64,25 +91,26 @@
         									<th>Día Práctica</th>        								
         									<th>Horario</th>
     									</tr>
-    								</thead>
-							  	<tr> 
-        								<td>{{schedule.dia_t|title}}</td>
-        								<td>{{schedule.hora_inicio_t|time:"H:i"}} - {{schedule.hora_fin_t|time:"H:i"}}</td>
-        								<td>{{schedule.dia_p|title}}</td>
-        								<td>{{schedule.hora_inicio_p|time:"H:i"}} - {{schedule.hora_fin_p|time:"H:i"}}</td>
-    								</tr>
-    							</table>
-    							</span>
-							{% endfor %}
-											
-					{% endfor %}
-					</div>
+    								  </thead>
+							  		<tr> 
+        									<td>{{schedule.dia_t|title}}</td>
+        									<td>{{schedule.hora_inicio_t|time:"H:i"}} - {{schedule.hora_fin_t|time:"H:i"}}</td>
+        									<td>{{schedule.dia_p|title}}</td>
+        									<td>{{schedule.hora_inicio_p|time:"H:i"}} - {{schedule.hora_fin_p|time:"H:i"}}</td>
+    									</tr>
+    								</table>
+    								<div class="btn-group btn-group-justified">
+ 									<a class="btn btn-sm btn-default" href="{% url 'horarios:edit_horario' catedra.id schedule.id %}"><i class="icon-pencil"> Editar </i> </a>
+ 									<a class="btn btn-sm btn-danger" href="#"> <i class="icon-trash icon-white"> Eliminar </i></a> 
+								</div>
+    								{% endfor %}
+    						</div>
+    						{% endfor %}
+    					</div>
 					<div class="panel-footer">
 						<div class="btn-group btn-group-justified">
- 							<a class="btn btn-sm btn-default" href="{% url 'horarios:add_horario' catedra.id %}"> Agregar horario </a>
- 							<a class="btn btn-sm btn-default" href="{% url 'horarios:edit_horario' catedra.id %}"> Editar </a>
- 							<a class="btn btn-sm btn-default" href="#"> Eliminar </a> 
-						</div>
+ 							<a class="btn  btn-default" href="{% url 'horarios:add_horario' catedra.id %}"> Agregar horario </a>
+ 						</div>
 					</div>
 				</div>
 			</div>

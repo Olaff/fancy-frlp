@@ -13,25 +13,43 @@ from comision.models import Comision
 from horario.forms import HorarioForm
 
 
-@permission_required('empleados.can_add')
+@permission_required('empleados.can_add', raise_exception = True)
 def add_horario(request, id_catedra): #Recibe el id de catedra que agregue
 	catedra = get_object_or_404(Catedra, pk=id_catedra) #Agarro la catedra 
 	queryset = Comision.objects.filter(carrera = catedra.carrera, nivel=catedra.nivel)
 	formlist_size = len(queryset)
-	HorarioInlineFormSet = inlineformset_factory(Catedra, Horario, form=HorarioForm, max_num=formlist_size, can_delete=False) #Creo el inlineformset con los dos modelos
+	HorarioInlineFormSet = inlineformset_factory(Catedra, Horario,  form=HorarioForm, max_num=formlist_size, can_delete=False) #Creo el inlineformset con los dos modelos
 	HorarioInlineFormSet.form.base_fields["comision"].queryset = queryset
-	if request.method =='POST':
-		formset = HorarioInlineFormSet(request.POST, request.FILES, instance=catedra) #Instancio el formset con la catedra que agarre
-		if formset.is_valid(): 
-			#Si todo esta validado guardo en DB
-			formset.save()
-			#Envio un mensaje al usuario 
-			messages.success(request,' Datos agregados exitosamente')
-			#redirecciono a la lista de comisiones
-			url = reverse ('catedra_list', args=[catedra.carrera]) #Redirijo a la lista de catedras segun la carrera
-			return HttpResponseRedirect(url)
-	else:
-		formset = HorarioInlineFormSet(instance=catedra)
-		
+	formset = HorarioInlineFormSet(request.POST or None , request.FILES or None , instance=catedra) #Instancio el formset con la catedra que agarre
+	if formset.is_valid(): 
+		#Si todo esta validado guardo en DB
+		formset.save()
+		#Envio un mensaje al usuario 
+		messages.success(request,' Datos agregados exitosamente')
+		#redirecciono a la lista de 
+		url = reverse ('catedras:catedra_details', args=[catedra.id]) 
+		return HttpResponseRedirect(url)
 	template_vars = {'formset': formset} #Variable que le paso al contexto
 	return render_to_response('add_horario.html', template_vars, context_instance=RequestContext(request))
+
+@permission_required('empleados.can_add', raise_exception = True)
+def edit_horario(request, id_catedra, id_schedule):
+	catedra = get_object_or_404(Catedra, pk=id_catedra) #Agarro la catedra
+	horario = get_object_or_404(Horario, pk=id_schedule) #Agarro el horario 
+	queryset = Comision.objects.filter(carrera = catedra.carrera, nivel=catedra.nivel)
+	formlist_size = len(queryset)
+	HorarioInlineFormSet = inlineformset_factory(Catedra, Horario, form=HorarioForm, max_num=formlist_size, can_delete=False) #Creo el inlineformset con los dos modelos
+	HorarioInlineFormSet.form.base_fields["comision"].queryset = queryset
+	form = HorarioForm(request.POST or None, instance=horario)
+	formset = HorarioInlineFormSet(request.POST or None, request.FILES or None, instance=catedra)
+	if form.is_valid():
+		horario = form.save(commit=False)		
+		if formset.is_valid():
+			horario.save()
+			formset.save()
+			messages.success(request,'Horario modificado exitosamente')
+			url = reverse('catedras:catedra_details', args=[catedra.carrera])
+			return HttpResponseRedirect(url)
+	template_vars = {'formset': formset, 'form': form}
+	return render_to_response('edit_horario.html', template_vars, context_instance=RequestContext(request))
+			

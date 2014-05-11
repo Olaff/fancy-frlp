@@ -5,16 +5,18 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *
 from crispy_forms.bootstrap import FormActions
 from horario.models import Horario
+from comision.models import Comision 
 
 class HorarioForm(ModelForm):
 	class Meta:
          	model = Horario
          	
-	def __init__(self, *args, **kwargs): #Reimplemento el constructor 
-        	super(HorarioForm, self).__init__(*args, **kwargs) #Llamo al padre
+	def __init__(self,*args, **kwargs): #Reimplemento el constructor 
+		super(HorarioForm, self).__init__(*args, **kwargs) #Llamo al padre
 		# Customizo mensaje de error para todos los campos del formulario 
 		for field in self.fields.values():
-        		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label)}
+        		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label), 'invalid': "No es un formato válido, vieja."}
+        		 
            	self.helper = FormHelper(self)
            	self.helper.form_class = 'form-horizontal'
            	self.helper.label_class = 'col-lg-3'
@@ -43,7 +45,12 @@ class HorarioForm(ModelForm):
            			),
            			Field('ayudantes', label='Ayudantes', placeholder='ayudantes'),
            			          			
-           		),           		
+           		),
+           		FormActions(
+    					HTML('<input type="submit" class="btn btn-primary"name="submit" value="Guardar"/>'),
+    					HTML('<input type="reset" class="btn btn-default"name="reset" value="Borrar"/>'),
+    					HTML("""<a class="btn btn-default" href="{% url 'users:index' %}">Cancelar</a>"""),
+    					css_class = 'pull-right',
+			),          		
            	)
-           	
-		self.helper.add_input(Submit('submit', 'Guardar'))
+        

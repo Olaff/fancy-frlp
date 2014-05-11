@@ -6,5 +6,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('horario.views',
 	url(r'^(?P<id_catedra>\d+)/addhorario/$', 'add_horario', name='add_horario'),
-	url(r'^(?P<id_catedra>\d+)/edithorario/$', 'add_horario', name='edit_horario'),
+	url(r'^(?P<id_catedra>\d+)/edithorario/(?P<id_schedule>\d+)/$', 'edit_horario', name='edit_horario'),
 )	
