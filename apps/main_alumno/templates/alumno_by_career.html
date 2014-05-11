@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load render_table from django_tables2 %}
 {% block title %} Lista de alumnos {% endblock %}
-{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' /> {% endblock %}
+{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' /> 
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/tables.css'>
+{% endblock %}
 
 
 {% block header %}
-	{% include 'index.html' %}
-	
 	{% block alertmessage %}
 	{% if messages %} 
     				
@@ -19,6 +20,6 @@
 	{% endblock %}
 {% endblock %}
 {% block content %}
-{% render_table alumnos %}
+{% render_table alumnos 'alumno_table.html' %}
 
 {% endblock %}

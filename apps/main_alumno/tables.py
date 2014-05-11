@@ -12,4 +12,5 @@ class AlumnoTable(tables.Table):
 		exclude = ["id", "slug"]
 		empty_text = 'No hay alumnos para esta carrera'
 		sequence = ("apellido", "nombres", "legajo", "dni", "carrera", "domicilio", "...")
-		attrs = {"class": "table table-bordered table-hover"}
+		attrs = {"class": "table table-bordered table-hover",
+			      "pagination": "text-center"}

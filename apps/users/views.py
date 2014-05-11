@@ -19,7 +19,6 @@ def index(request):
 	template_vars = {'carreras': carreras, 'comisiones': comisiones}
 	return render_to_response('index.html', template_vars, context_instance=RequestContext(request))
 	
-#VISTAS PARA LOGOUT 
 @login_required(login_url='/login/')
 def logout_user(request):
 	logout(request)

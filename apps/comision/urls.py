@@ -8,6 +8,6 @@ urlpatterns = patterns('comision.views',
 	url(r'^addcomision/$', 'add_comision', name='add_comision'),
 	url(r'^editar/(?P<id>\d+)/$', 'edit_comision', name='comision_edit'),
 	url(r'^eliminar/(?P<id>\d+)/$', 'comision_delete', name='comision_delete'),
-	url(r'^lista_comisiones/$', 'comision_list', name='comision_list'),
+	url(r'^lista_comisiones/(?P<carrera>\w+)/$', 'comision_list', name='comision_list'),
 	url(r'^(?P<id>\d+)/detalles/$', 'comision_detail', name='comision_detail'),
 )

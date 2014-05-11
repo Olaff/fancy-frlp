@@ -14,7 +14,8 @@ class HorarioForm(ModelForm):
         	super(HorarioForm, self).__init__(*args, **kwargs) #Llamo al padre
 		# Customizo mensaje de error para todos los campos del formulario 
 		for field in self.fields.values():
-        		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label)}
+        		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label), 'invalid': "No es un formato válido, vieja."}
+        		 
            	self.helper = FormHelper(self)
            	self.helper.form_class = 'form-horizontal'
            	self.helper.label_class = 'col-lg-3'

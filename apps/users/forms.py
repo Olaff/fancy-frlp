@@ -13,8 +13,4 @@ class LoginForm(AuthenticationForm):
         	self.fields['password'].label = "Contraseña"
         	for field in self.fields.values():
            		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label)}
-        	self.helper = FormHelper(self)
-        	self.helper.layout = Layout(
-            		Field('username', label="Usuario", placeholder="Nombre de usuario"),
-            		Field('password', placeholder="Contraseña"),
-        	)
+        	

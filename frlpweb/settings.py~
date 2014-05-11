@@ -1,3 +1,5 @@
+# -*-encoding:utf-8-*-
+
 """
 Django settings for frlpweb project.
 
@@ -7,7 +9,7 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
-# -*-encoding:utf-8-*-
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import sys

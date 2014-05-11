@@ -14,7 +14,7 @@ class CatedraForm(ModelForm):
            	#CrispyForms
            	self.helper = FormHelper(self)
            	self.helper.form_class = 'form-horizontal'
-           	self.helper.label_class = 'col-sm-2'
+           	self.helper.label_class = 'col-lg-2'
 		self.helper.field_class = 'col-lg-4'
 		self.helper.help_inline = True
 		self.helper.layout = Layout(
@@ -30,8 +30,8 @@ class CatedraForm(ModelForm):
 					'sitio',
 			),
 			FormActions(
-    					Submit('submit', 'Guardar'),
-    					HTML('<input type="reset" name="reset" value="Borrar"/>'),
+    					HTML('<input type="submit" class="btn btn-primary"name="submit" value="Guardar"/>'),
+    					HTML('<input type="reset" class="btn btn-default"name="reset" value="Borrar"/>'),
     					HTML("""<a class="btn btn-default" href="{% url 'users:index' %}">Cancelar</a>"""),
     					css_class = 'pull-right',
 			),

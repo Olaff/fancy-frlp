@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
 
 {% block title %} Lista de cátedras {% endblock %}
-{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' /> {% endblock %}
+	{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' media="screen" /> 
+	{% endblock %}
 
 
 {% block header %}
-	{% include 'index.html' %}
+	
 	
 	{% block alertmessage %}
 	{% if messages %} 
     				
             			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
-              				<div class="alert alert-warning">
-    						<strong>{{ message }}  </strong> 
+              				<div class="container">
+            					<div class="col-sm-12 pull-left">
+              						<div class="alert alert-info dismissable">
+              							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    								<span class="text-center"><strong>{{ message }}  </strong> </span>
+    							</div>
+    						</div>
     					</div>
            			 {% endfor %} 
 	 {% endif %}
@@ -22,28 +29,54 @@
 
 <div class="container">
   	 <div class="row-fluid">  
-  	 {% regroup catedras|dictsort:"nivel" by nivel as catedras_list%}
-  	 	{% for catedra in catedras_list %}
-  	 	 <div class="col-lg-5 control-group">
-  	 	 	<div class="panel panel-info">
-  		 		<div class="panel-heading"> <strong>Catedras de {{ catedra.grouper }}º nivel </strong></div>
-  		 		<div class="panel-body">	
-  		 			<ul class="list-group"> 
-  		 				{% for item in catedra.list|dictsort:"electiva" %}
-  		 					<h5 class="list-group-item-heading">  {{item.nombre }} {% if item.electiva %}  <em>  Electiva </em> {% endif %}</h5>
-							<a  class="list-group-item-text" href="{% url 'catedras:catedra_edit' item.id %}"><i class="fa fa-pencil-square"> Editar </a></i>
-	 						<a class="list-group-item-text"  href="{% url 'catedras:catedra_details' item.id %}"> <i class="fa fa-info-circle"> Ver detalles </i> </a>
-	 						<a class="list-group-item-text"  href="{% url 'catedras:catedra_delete' item.id %}"> <i class="fa fa-times">Eliminar </i> </a>
- 		 				{% endfor %}
-  		 			</ul>
+  	 	<div class="col-sm-12">
+  		 	{% regroup catedras|dictsort:"nivel" by nivel as catedras_list%}
+  	 		{% for catedra in catedras_list %}
+  	 			<div class="col-sm-6 control-group">
+  	 	 			<div class="panel panel-default">
+  		 				<div class="panel-heading">
+  		 					 <strong>Catedras de {{ catedra.grouper }}º nivel </strong></div>
+  		 				<div class="panel-body">	
+  		 					<ul class="list-group"> 
+  		 						{% for item in catedra.list|dictsort:"electiva" %}
+  		 							<!-- Delete Catedra  MODAL-->
+            								<div id="{{item.id}}" class="modal fade" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+            								  <div class="modal-dialog modal-sm">
+            								  	<div class="modal-content">
+            									 <div class="modal-header">
+              										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              										<h4 id="myModalLabel">Eliminar Cátedra</h4>
+            									 </div>
+            									 <div class="modal-body">
+             										<p>¿Estás seguro que deseas eliminar la cátedra de  <i class="text-warning">{{ item.nombre }} ?</i></p>
+            									 </div>
+            									 <div class="modal-footer">
+              										<button class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+              										<a class="btn btn-danger btn-sm" href="{% url 'catedras:catedra_delete' item.id%}" data-toggle="modal">
+              										<i class="icon-trash icon-white"></i> Eliminar</a>
+            									 </div>
+            									</div>
+            								</div>
+           								</div>
+           								<!-- Delete Catedra Modal -->
+  		 							<h5 class="list-group-item-heading">  {{item.nombre }} {% if item.electiva %}  <em>  Electiva </em> {% endif %}</h5>
+									<a  class="btn btn-default btn-xs" href="{% url 'catedras:catedra_edit' item.id %}"><i class="icon-pencil"> Editar</i> </a>
+	 								<a class="btn btn-info btn-xs"  href="{% url 'catedras:catedra_details' item.id %}"> <i class="icon-info-sign""> Ver detalles </i> </a>
+	 								<button type="button" data-toggle="modal" data-target="#{{item.id}}" class="btn btn-danger btn-xs" ><i class="icon-trash icon-white"> Eliminar</i></button>
+          	 						{% endfor %}
+  		 					</ul>
+  		 				</div>
+  		 			</div>
   		 		</div>
-  		 	</div>
-  		 </div>
-		{% endfor %}
-			
+			{% endfor %}
+		</div>
 	</div>
 </div>
 {% endblock %}
+
+{% block customjs %} 
+	
+ {% endblock%}
 
 
   		  

@@ -4,20 +4,16 @@
 {% block title %} Agregar comisiones  {% endblock %}
 {% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
 	{% block header %} 
-	{% include 'index.html' %}
-		<ol class="breadcrumb">
-  			<li><a href="{% url 'users:index' %}">Inicio</a></li>
-  			<li class="active">Agregar Comisión </li>
-		</ol>
 	{% endblock %}
-	
 {% block content %}
 
 <div class="container">
   	 <div class="row-fluid"> 
-  	  <div class="well clearfix">
+  	 	
+  	 	 	<div class="well clearfix">
 			{% csrf_token %}
 			{% crispy form %}
+			</div>
 	</div>
 </div>
 {% endblock %}

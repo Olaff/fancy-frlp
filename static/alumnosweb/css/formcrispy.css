@@ -3,3 +3,21 @@
 .asteriskField {
     display: none;
 }
+
+.rounded{
+    padding: 0px;
+    background: #eeeeee;
+    border: 1px solid #F5F0F0;
+    
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    }
+
+.shadow  {
+	 box-shadow: 4px 8px 25px 1px rgba(220, 220, 220, 0.68);
+    	-moz-box-shadow: 4px 8px 25px 1px rgba(220, 220, 220, 0.68);
+    	-webkit-box-shadow: 4px 8px 25px 1px rgba(220, 220, 220, 0.68);
+}
+
+

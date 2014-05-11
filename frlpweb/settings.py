@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_extensions',
     'django_tables2',
+    'debug_toolbar',
     'apps.main_alumno',
     'apps.comision',
     'apps.carrera',

@@ -30,8 +30,8 @@ class CarreraForm(ModelForm):
            		),
            		
            	        FormActions(
-    				Submit('submit', 'Guardar'),
-    				HTML('<input type="reset" class="btn" name="reset" value="Borrar"/>'),
+    				HTML('<input type="submit" class="btn btn-inverse" name="submit" value="Guardar"/>'),
+    				HTML('<input type="reset" class="btn btn-default" name="reset" value="Borrar"/>'),
     				HTML("""<a class="btn btn-default" href="{% url 'users:index' %}">Cancelar</a>"""),
     				css_class = 'pull-right',
 			),

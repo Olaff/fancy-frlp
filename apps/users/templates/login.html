@@ -2,51 +2,66 @@
 {% load crispy_forms_tags %}
 
 {% block title %}  Bienvenido a AlumnosWeb {% endblock %}
-{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
+{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> 
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' /> 
+{% endblock %}
+
  {% crispy form %}
 {% block header %} 
-	<nav class="navbar navbar-inverse navbar-fixed-top"></nav>
-	
+	<nav class="navbar navbar-default navbar-fixed-top"></nav>
+	{% block alertmessage %}
+			{% if messages %} 
+    				{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+            				<div class="container">
+            					<div class="col-sm-4 pull-right">
+              						<div class="alert alert-danger dismissable">
+              							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    								<span class="text-center"><strong>{{ message }}  </strong> </span>
+    							</div>
+    						</div>
+    					</div>
+           			 {% endfor %} 
+			{% endif %}
+	{% endblock %}
 {% endblock %}
 
 {% block content %}
 <div class="container">
    <div class="row">
    	<div class="col-lg-8">
+   		
    			<img class="img-responsive" src="{{ STATIC_URL }}img/login_banner.png" alt="AlumnosWeb Logo" style="margin-top: 60px" />
    			<h4 class="text-left text-justify" style="position:absolute; top: 230px;  left: 279px"> 
-   				<small style="font-size: 15px;"> 
-   					<em>
+   				<small> 
+   					<p class="lead main-title">
 						Disfrutá del sitio donde podés ver toda la información relacionada con tu actividad académica.<hr>
-						El nombre de usuario y tu contraseña serán dados cuando recibas la Libreta Universitaria. <br>
-					</em>
+					</p>
+					<p class="lead main-title">
+						El nombre de usuario y tu contraseña serán dados cuando recibas la Libreta Universitaria. 
+					</p>
 				</small>
 			</h4>	
 	</div>
    	<div class="col-lg-4">
-		<div class="well clearfix" style="margin-top: 150px; height: 300px; width: 330px; background-color: rgba(245, 245, 245, 0.4); border-radius:5%;">
-			<form action="{% url 'users:login' %}" method="post" accept-charset="utf-8">
+		<div class="well clearfix shadow" style="margin-top: 150px; height: 300px; width: 330px; border-radius:5%;">
+			<form  action="{% url 'users:login' %}" method="post" accept-charset="utf-8">
+				<fieldset>
+    					<legend> Ingrese al sistema</legend>
+    				</fieldset>
     				{{ form|crispy }}
+    				
     				{% csrf_token %}
     				<input type="hidden" name="next" value="{{ next }}" />
-    				<input class="btn btn-default" type="submit" value="Login" />
-</form>
+    				<input class="btn btn-default pull-right" type="submit" value="Ingresar" />
+			</form>
 
 		</div>
 	</div>
 	
   </div>
 </div>
-{% block alertmessage %}
-			{% if messages %} 
-    				
-            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
-              				<div class="alert alert-danger">
-    						<span class="text-center"><strong>{{ message }}  </strong> </span>
-    					</div>
-           			 {% endfor %} 
-			 {% endif %}
-		{% endblock %}
+
 
 {% endblock %}
 
