@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
 {% block title %}  Bienvenido a AlumnosWeb {% endblock %}
 {% block customcss %}
 	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> 
 	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' /> 
 {% endblock %}
 
- {% crispy form %}
 {% block header %} 
 	<nav class="navbar navbar-default navbar-fixed-top"></nav>
 	{% block alertmessage %}

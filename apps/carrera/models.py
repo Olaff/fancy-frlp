@@ -16,5 +16,12 @@ class Carrera(models.Model):
 	year = models.IntegerField(max_length=4, default='', choices = options, verbose_name="Año")
 	slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('nombre',))
 	
+	def get_title(self):
+		#Returns career title depending its name
+		if 'sistema' in self.nombre:
+			return 'Ingenieria en %s de Informacion' % (self.nombre.title())
+		else:
+			return  'Ingenieria %s' % (self.nombre.title())
+	
 	def __unicode__(self):
 		return smart_unicode(self.nombre)

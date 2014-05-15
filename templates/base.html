@@ -7,102 +7,12 @@
 		<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/bootstrap.min.css' />
 		{%block customcss %} {% endblock%}
 		 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> <!-- FontAwesome para tirar íconos -->
-	</head>
-	<header class="container">
- 			<div class="row">
-				<div class="col-lg-12">
-					<div class="page-header">
-						<nav class="navbar navbar-default navbar-fixed-top">	
-							<div class="navbar-header"> 
-								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-       									<span class="icon-bar"></span>
-                							<span class="icon-bar"></span>
-                    							<span class="icon-bar"></span>
-       								</button>
-       								<a class="navbar-brand" href="{% url 'users:index' %}"> <i class="fa fa-home"></i> AlumnosWeb</a>
-       							</div>
-       						<div class="navbar-collapse collapse navbar-default-collapse">
-							<ul class="nav navbar-nav">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" > Gestión de Carreras  <span  class="caret"></span> </a>
-									<ul class="dropdown-menu">
-										<li><a name="add_carrera" href="{% url 'carreras:add_carrera' %}"> Agregar carrera </a></li>
-										<li> <a name="carrera_list" href="{% url 'carreras:carrera_list' %}"> Ver carreras </a> </li>
-									</ul>
-								</li>
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" > Gestión de Comisiones  <span  class="caret"></span> </a>
-									<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-										<li><a name="add_comision" href="{% url 'comisiones:add_comision' %}"> Agregar comisión </a> </li>
-										<li class="divider"></li>
-										<li class="dropdown-submenu">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Ver comisiones por carrera </a>
-											<ul class="dropdown-menu">
-												<li>
-												{% for carrera in carreras %}
-													<a name="nombre_carrera" href="{% url 'comisiones:comision_list' carrera.nombre %}">
-														{% if 'sistema' in carrera.nombre %}
-															Ingenieria en {{carrera.nombre|title}} de Información
-														{% else %}
-															Ingeniería {{carrera.nombre|title}}
-														{% endif %}
-													</a>
-												{% endfor %}
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-								<li class="dropdown">
-            								<a href="#" class="dropdown-toggle" data-toggle="dropdown" >	Gestión de Cátedras <span class="caret"></span></a>
-    									<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-              									<li><a name="add_catedras" href="{% url 'catedras:add_catedra' %}">  Agregar Cátedra  </a>  </li>
-             									<li class="divider"></li>
-              									<li class="dropdown-submenu">
-                									<a href="#" class="dropdown-toggle"  data-toggle="dropdown">	Ver cátedras por carrera</a>
-                									<ul class="dropdown-menu">
-                  										<li>
-												{%for carrera in carreras %}
-													<a name="nombre_carrera" href="{% url 'catedras:catedra_list' carrera.nombre %}"> 
-														{% if  "sistema" in carrera.nombre %} 
-	  														Ingeniería  en {{carrera.nombre|title}} de Información
-	  													{% else %}
-	  														Ingeniería {{carrera.nombre|title}}
-						  								{% endif %}
-						  							</a>  
-						  						{% endfor %}
-						  			</li>
-               								 </ul>
-             							 </li>
-            						</ul>
-        					</li>
-						<li class="nav navbar-nav">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#"> Gestión de Alumnos<span class="caret"></span> </a>
-							<ul class="dropdown-menu">
-								<li><a name="add_alumno" href="{% url 'alumnos:add_alumno' %}"> Agregar un Alumno </a></li>
-								<li><a name="alumnos_list" href="{% url 'alumnos:lista_alumnos' %}"> Editar información de un Alumno </a></li>
-								<li><a name="alumnos_list" href="{% url 'alumnos:lista_alumnos' %}"> Eliminar un Alumno </a></li>
-								</ul>
-							</li>
-							<li class="navbar-text"> Bienvenido, <strong>{{user.username|title}} </strong></li>
-								<form class="navbar-form navbar-right">
-										<a href="{% url 'users:logout_user' %}"> <button type="button" class="navbar-btn btn-default" >Salir </button> </a>
-		   						 </form>
-							</ul> 
-						</div>
-						</nav>
-					</div>
-				</div>
-			 </div>
-		{% block header%}
-			
-		{% endblock %}
-		</header>
-		
+	</head>		
+		{% block header %}{% endblock %}
+		{% block navigation %} {% endblock %}
 	<body>
 		<div id="wrap">		
-    			{% block  content %}
-			{% endblock %}
+			{% block  content %}{% endblock %}
 		</div>
 		<footer id="footer" class="footer navbar-fixed-bottom"">
 			<div class="container">

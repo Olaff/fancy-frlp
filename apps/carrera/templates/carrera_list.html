@@ -31,11 +31,7 @@
 	  	 	<div class="col-lg-6 control-group">
 	  		 	<div class="panel panel-default">
 	  				<div class="panel-heading text-center"> 
-	  					<h4>{% if  "sistema" in carrera.nombre %} 
-	  						Ingeniería  en {{carrera.nombre|title}} de Información
-	  					{% else %}
-	  						Ingeniería {{carrera.nombre|title}}
-	  					{% endif %}</h4>
+	  					<h4>{{carrera.get_title}}</h4>
 	  				</div>
 	  				<div class="panel-body">	
 	  					<ul class="list-group"> 
