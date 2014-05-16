@@ -9,8 +9,10 @@
 		 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> <!-- FontAwesome para tirar íconos -->
 	</head>		
 		{% block header %}{% endblock %}
-		{% block navigation %} {% endblock %}
-	<body>
+		{% block navigation %}
+			{% include 'navbar.html' %}
+		{% endblock %}
+	<body style="padding-top: 70px;">
 		<div id="wrap">		
 			{% block  content %}{% endblock %}
 		</div>

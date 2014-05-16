@@ -5,43 +5,34 @@
 	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/fixcolumn.css' /> 
 {% endblock %}
 {% block header %}
-	
+		
 {% endblock%}
 
 {% block content %}
 	    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    
       <div class="container">
-        <h2>¡ Bienvenido a la administración de AlumnosWeb !</h2>
-        <p> Dentro de este sitio podés encontrar toda información y herramientas para gestionar la actividad académica de la Facultad Regional La Plata. Por otra parte, si querés conocer las últimas noticias, presioná el botón que se encuentra debajo.</p>
-        <p><a class="btn btn-primary btn-lg" role="button"> Novedades &raquo;</a></p>
+      	  <div class="row">
+      	     <div class="col-lg-12">
+      	        <div class="jumbotron">
+        		<h2>¡ Bienvenido a la administración de AlumnosWeb !</h2>
+        		<p> Dentro de este sitio podés encontrar toda información y herramientas para gestionar la actividad académica de la Facultad Regional La Plata. Si querés conocer las últimas noticias, presioná el botón que se encuentra debajo.</p>
+        		<p><a class="btn btn-primary btn-lg" role="button"> Novedades &raquo;</a></p>
+        	</div>
+             </div>
+          </div>
       </div>
-    </div>
+    
 
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-sm-3 fourth-column">
-          <h2>Carreras </h2>
-          <p class="text-justify"> Si necesitás agregar o modificar los datos de las carreras , así como también ver el detalle de las mismas, este es el lugar. </p>
-          <p><a class="btn btn-default" href="{% url 'carreras:index_carrera' %}" role="button"> Ir &raquo;</a></p>
+          <h2> Regional La Plata</h2>
+          <p class="text-justify"> Si querés visitar el sitio de la Regional, pinchá en el siguiente botón </p>
+          <p><a class="btn btn-default" href="#" role="button"> Ir a FRLP &raquo;</a></p>
         </div>
-        <div class="col-sm-3 fourth-column">
-          <h2>Cátedras</h2>
-          <p class="text-justify"> Si necesitás agregar o modificar los datos de las cátedras, así como también ver el detalle de las mismas, este es el lugar.</p>
-          <p><a class="btn btn-default" href="#" role="button"> Ir &raquo;</a></p>
        </div>
-        <div class="col-sm-3 fourth-column">
-          <h2>Comisiones </h2>
-          <p class="text-justify"> Si necesitás agregar o modificar los datos de las comisiones, así como también ver el detalle de las mismas, este es el lugar.</p>
-          <p><a class="btn btn-default" href="#" role="button"> Ir &raquo;</a></p>
-        </div>
-        <div class="col-sm-3 fourth-column">
-          <h2>Alumnos </h2>
-          <p class="text-justify"> Si necesitás agregar o modificar los datos de los alumnos, así como también ver el detalle de las mismas, este es el lugar. </p>
-          <p><a class="btn btn-default" href="#" role="button"> Ir &raquo;</a></p>
-        </div>
-      </div>
       
 
       <hr>

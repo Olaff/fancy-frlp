@@ -10,13 +10,6 @@ from carrera.forms import CarreraForm
 
 @login_required(login_url='/login/')
 @permission_required('empleados.can_add', raise_exception=True)
-def index_carrera(request):
-	carreras = Carrera.objects.all()
-	template_vars = {'carreras':carreras}
-	return render_to_response('index_carrera.html', template_vars, context_instance=RequestContext(request))
-	
-@login_required(login_url='/login/')
-@permission_required('empleados.can_add', raise_exception=True)
 def add_carrera(request):
 	form = CarreraForm(request.POST or None)
 	if form.is_valid():

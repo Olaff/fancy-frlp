@@ -14,7 +14,10 @@ from apps.comision.models import Comision
 
 @login_required(login_url='/login/')
 def index(request):
-	return render_to_response('index.html',  context_instance=RequestContext(request))
+	carreras = Carrera.objects.all()
+	comisiones = Comision.objects.all()
+	template_vars = {'carreras': carreras, 'comisiones': comisiones}
+	return render_to_response('index.html', template_vars, context_instance=RequestContext(request))
 	
 @login_required(login_url='/login/')
 def logout_user(request):
