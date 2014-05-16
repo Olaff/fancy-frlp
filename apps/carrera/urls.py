@@ -5,6 +5,7 @@ from apps.carrera.models import Carrera
 admin.autodiscover()
 
 urlpatterns = patterns('carrera.views',
+	url(r'^index_carrera/$', 'index_carrera', name='index_carrera'),
 	url(r'^addcarrera/$','add_carrera', name='add_carrera'),
 	url(r'^editar/(?P<id>\d+)/$', 'edit_carrera', name='edit_carrera'),
 	url(r'^lista_carreras/$', 'carrera_list', name='carrera_list'),
