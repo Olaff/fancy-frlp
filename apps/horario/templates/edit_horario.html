@@ -13,12 +13,27 @@
 
 <div class="container">
   	 <div class="row-fluid">
-  	 	<div class="#{{form_num}}">
-  	 		{% crispy formset formset.form.helper %}
-		</div>
+  	 	
+  	 		{{ formset.management_form|crispy }}
+				{% for form in formset %}
+					{% if form.instance.id == form_num  %}
+    						<div id="{{form_num}}">    							
+    							{% crispy form %}
+    						</div>	
+    					{% else %}
+    						<p>Instancia : {{form.instance.id}}</p>
+    						<p>Form que busco : {{form_num}} </p>
+    					{% endif %}
+				{% endfor %}
+		
   	 </div>
 </div>
 {% endblock %}
 {% block customjs %}
-	<script type="text/javascript" src="{{STATIC_URL}}js/hide-form.js"></script>
+	<script type="text/javascript" >
+		$( document ).ready(function(event) {
+ 			$("#{{form_num}}").hide();
+			event.preventDefault();
+ 		});
+	</script>
 {% endblock %}
