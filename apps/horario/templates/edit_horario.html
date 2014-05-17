@@ -13,8 +13,12 @@
 
 <div class="container">
   	 <div class="row-fluid">
-  	 		{% crispy form %} 
+  	 	<div class="#{{form_num}}">
+  	 		{% crispy formset formset.form.helper %}
+		</div>
   	 </div>
 </div>
 {% endblock %}
-
+{% block customjs %}
+	<script type="text/javascript" src="{{STATIC_URL}}js/hide-form.js"></script>
+{% endblock %}

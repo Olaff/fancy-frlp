@@ -5,10 +5,14 @@
 		{% block alertmessage %}
 			{% if messages %}     				
             			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
-              				<div class="alert alert-warning alert-dismissable">
-              					<button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
-    						<strong>{{ message }}  </strong> 
-    					</div>
+            				<div class="container">
+            				     <div class="col-sm-12">
+              				        <div class="alert alert-success alert-dismissable">
+              					     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    						     <strong>{{ message }}  </strong> 
+    					       </div>
+    					     </div>
+    					</div>  
            			 {% endfor %} 
 			 {% endif %}
 		{% endblock %}

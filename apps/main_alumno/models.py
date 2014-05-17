@@ -18,13 +18,19 @@ class  Alumno(models.Model):
 	localidad = models.CharField(max_length=25)
 	telefono = models.CharField(max_length=20, verbose_name="Teléfono", help_text="Código de área - teléfono")
 	celular = models.CharField(max_length=20)	
-	legajo = models.CharField(max_length=50, unique=True)	
+	legajo = models.CharField(max_length=50, unique=True, help_text='Formato: XX-XXXXX-Y')	
 	mail = models.EmailField()
 	slug = AutoSlugField(_('slug'), max_length=50, unique=True, populate_from=('apellido',))
 	carrera = models.ForeignKey('carrera.Carrera', help_text="Seleccione la carrera")
 	
 	def __unicode__(self):
 		return smart_unicode(self.apellido, self.nombres)
+		
+	def get_full_name(self):
+		if self is not None:
+			return ' '.join([self.apellido.title(), self.nombres.title()])
+		
+			
 	
 
 	

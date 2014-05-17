@@ -11,7 +11,7 @@
                 			<span class="icon-bar"></span>
                     			<span class="icon-bar"></span>
        				</button>
-       			      <a class="navbar-brand" href="{% url 'users:index' %}"> <i class="fa fa-home"></i> AlumnosWeb</a>
+       			      <a class="navbar-brand" href="{% url 'users:index' %}"> <i class="icon-home"></i> AlumnosWeb</a>
 			    <!-- End header -->
        			    </div>
 			  <!-- Navbar collapse  -->
@@ -66,14 +66,32 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"> Gestión de Alumnos<span class="caret"></span> </a>
 						<ul class="dropdown-menu">
 							<li><a name="add_alumno" href="{% url 'alumnos:add_alumno' %}"> Agregar un Alumno </a></li>
-							<li><a name="alumnos_list" href="{% url 'alumnos:lista_alumnos' %}"> Editar información de un Alumno </a></li>
+							<li><a name="alumnos_list" href="{% url 'alumnos:search_alumno' %}"> Buscar Alumno </a></li>
 							<li><a name="alumnos_list" href="{% url 'alumnos:lista_alumnos' %}"> Eliminar un Alumno </a></li>
 						</ul>
 					</li>
-					<li class="navbar-text"> Bienvenido, <strong>{{user.username|title}} </strong></li>
-						<form class="navbar-form navbar-right">
-							<a href="{% url 'users:logout_user' %}"> <button type="button" class="navbar-btn btn-default" >Salir </button> </a>
-		   				 </form>
+					<li class="nav navbar-nav">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"> Gestión de Cursadas<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a name="open_cursada" href="#"> Abrir inscripción</a></li>
+							<li><a name="close_cursada" href=#> Cerrar inscripción </a></li>
+							<li class="divider"></li>
+							<li ><a name="modify_cursada" href=#> ¿Modificar cursada ?</a></li>
+						</ul>
+					</li>
+					<ul class="navbar-right"> 
+						<div class="navbar-right btn-group navbar-btn">
+                    					<button class="btn btn-default"><span class="glyphicon glyphicon-user"></span> Bienvenido,<strong>{{user.username|title}} </strong></li>
+                    					<button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="glyphicon glyphicon-cog"></span></button>
+                    					<ul class="dropdown-menu">
+                      						<li><a href="#">Action</a></li>
+                      						<li><a href="#">Another action</a></li>
+                      						<li><a href="#">Something else here</a></li>
+                      						<li class="divider"></li>
+                      						<li><a name="logout" href="{% url 'users:logout_user' %}">Salir </a></li>	
+                    					</ul>
+                  				</div>
+            				</ul>
 				</ul>
 			<!--	Navbar collapse  -->
 		            </div>

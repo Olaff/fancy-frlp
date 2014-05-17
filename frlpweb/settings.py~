@@ -42,6 +42,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	"django.core.context_processors.tz",
 	"django.contrib.messages.context_processors.messages",
 	'django.core.context_processors.request',
+	#CUSTOM CONTEXT PROCESSORS
+	'apps.carrera.context_processors.get_carreras',
 )
 # Application definition
 
@@ -57,6 +59,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_extensions',
     'django_tables2',
+    'debug_toolbar',
     'apps.main_alumno',
     'apps.comision',
     'apps.carrera',

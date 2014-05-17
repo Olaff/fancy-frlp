@@ -75,6 +75,26 @@
 						<div class="list-group-item">		
 							<h4>Comisión {{com.numero}}</h4>
 							 	{% for schedule in com.horarios.all %}
+							 		<!-- Delete Horario  MODAL-->
+            								<div id="{{schedule.id}}" class="modal fade" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+            								  <div class="modal-dialog modal-sm">
+            								  	<div class="modal-content">
+            									 <div class="modal-header">
+              										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              										<h4 id="myModalLabel">Eliminar Cátedra</h4>
+            									 </div>
+            									 <div class="modal-body">
+             										<p>¿Estás seguro que deseas eliminar el horario de la <i class="text-warning">comisión  {{ com.numero }} ?</i></p>
+            									 </div>
+            									 <div class="modal-footer">
+              										<button class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+              										<a class="btn btn-danger btn-sm" href="{% url 'horarios:delete_horario' catedra.id schedule.id %}" data-toggle="modal">
+              										<i class="icon-trash icon-white"></i> Eliminar</a>
+            									 </div>
+            									</div>
+            								</div>
+           								</div>
+           								<!-- Delete Horario Modal -->
 								  	<dl class="dl-horizontal">
 							  			<dt>Turno: </dt>
 							  			<dd> <span class="three-dee">{{com.turno }} </span></dd>
@@ -99,11 +119,9 @@
         									<td>{{schedule.hora_inicio_p|time:"H:i"}} - {{schedule.hora_fin_p|time:"H:i"}}</td>
     									</tr>
     								</table>
-    								<div class="btn-group btn-group-justified">
- 									<a class="btn btn-sm btn-default" href="{% url 'horarios:edit_horario' catedra.id schedule.id %}"><i class="icon-pencil"> Editar </i> </a>
- 									<a class="btn btn-sm btn-danger" href="#"> <i class="icon-trash icon-white"> Eliminar </i></a> 
-								</div>
-    								{% endfor %}
+    								<a id="edit" class="btn btn-sm btn-default" href="{% url 'horarios:edit_horario' catedra.id schedule.id %}" ><i class="icon-pencil"> Editar </i> </a>
+ 								<button type="button" data-toggle="modal" data-target="#{{schedule.id}}" class="btn btn-sm btn-danger" ><i class="icon-trash icon-white"> Eliminar </i></button> 
+								{% endfor %}
     						</div>
     						{% endfor %}
     					</div>
@@ -111,10 +129,17 @@
 						<div class="btn-group btn-group-justified">
  							<a class="btn  btn-default" href="{% url 'horarios:add_horario' catedra.id %}"> Agregar horario </a>
  						</div>
+ 						
+ 						
+ 						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 {% endblock %}
+{% block customjs %}
+	<script type="text/javascript" src="{{STATIC_URL}}js/hide-form.js"></script>
+{% endblock %}
+
 

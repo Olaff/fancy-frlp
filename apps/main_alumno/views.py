@@ -41,7 +41,8 @@ def edit_alumno(request, id):
 					
 	template_vars = {'form': form}
 	return render_to_response('alumnos/edit_alumno.html', template_vars, context_instance=RequestContext(request)) 
-	
+
+# LISTING VIEWS	
 @login_required(login_url='/login/')
 def ListaAlumnos(request):
 	alumnos = Alumno.objects.all()
@@ -61,4 +62,18 @@ def alumno_details(request,id):
 	alumno = get_object_or_404(Alumno, id=id)
 	return render_to_response ('alumno_details.html', {'alumno': alumno}, context_instance=RequestContext(request))
 	
-
+#SEARCH VIEWS
+@login_required(login_url='/login/')
+def search_alumno(request):
+	return render_to_response('search_alumno.html', context_instance=RequestContext(request))
+	
+@login_required(login_url='/login/')
+def search_results(request):
+	query = request.GET['lega']
+	try:
+    		alumno = Alumno.objects.get(legajo=query)
+	except Alumno.DoesNotExist:
+    		alumno = None
+    		messages.error(request,'No hay resultados')
+	template_vars = {'alumno': alumno}
+	return render_to_response('search_results.html', template_vars, context_instance=RequestContext(request))

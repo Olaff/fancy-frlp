@@ -7,13 +7,12 @@
 {% endblock %}
 
 {% block header %} 
-	<nav class="navbar navbar-default navbar-fixed-top"></nav>
 	{% block alertmessage %}
 			{% if messages %} 
     				{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
             				<div class="container">
-            					<div class="col-sm-4 pull-right">
-              						<div class="alert alert-danger dismissable">
+            					<div class="col-sm-12">
+              						<div class="alert alert-danger fade">
               							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
     								<span class="text-center"><strong>{{ message }}  </strong> </span>
     							</div>
@@ -22,6 +21,9 @@
            			 {% endfor %} 
 			{% endif %}
 	{% endblock %}
+{% endblock %}
+{% block navigation %}
+<nav class="navbar navbar-default navbar-fixed-top"></nav>
 {% endblock %}
 
 {% block content %}
@@ -59,10 +61,12 @@
 	
   </div>
 </div>
-
-
 {% endblock %}
-
+{% block customjs %} 
+	<script type="text/javascript">
+		$(".alert").delay(200).addClass("in").fadeOut(2500);
+	</script>
+{% endblock %}
 
 
  

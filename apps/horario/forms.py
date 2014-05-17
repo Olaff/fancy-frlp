@@ -1,5 +1,6 @@
 #Forms for Horario
 # -*-encoding:utf-8-*-
+from django.db import models
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *
@@ -44,7 +45,10 @@ class HorarioForm(ModelForm):
            			),
            			Field('ayudantes', label='Ayudantes', placeholder='ayudantes'),
            			          			
-           		),           		
+           		),
+           		FormActions(
+    					HTML('<input type="submit" class="btn btn-primary"name="submit" value="Guardar"/>'),           		
+           		),
            	)
-           	
-		self.helper.add_input(Submit('submit', 'Guardar'))
+           	        	
+		

@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 import sys
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+# Add apps as template dir 
 sys.path.insert(1, os.path.join(PROJECT_ROOT, "apps"))
 
 DEFAULT_CHARSET = 'utf-8' 
@@ -42,6 +43,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	"django.core.context_processors.tz",
 	"django.contrib.messages.context_processors.messages",
 	'django.core.context_processors.request',
+	#CUSTOM CONTEXT PROCESSORS
+	'apps.carrera.context_processors.get_carreras',
 )
 # Application definition
 
