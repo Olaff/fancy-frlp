@@ -7,11 +7,8 @@
 
 
 {% block header %}
-	
-	
 	{% block alertmessage %}
-	{% if messages %} 
-    				
+	{% if messages %}     				
             			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
               				<div class="container">
             					<div class="col-sm-12 pull-left">
@@ -33,7 +30,7 @@
   		 	{% regroup catedras|dictsort:"nivel" by nivel as catedras_list%}
   	 		{% for catedra in catedras_list %}
   	 			<div class="col-sm-6 control-group">
-  	 	 			<div class="panel panel-default">
+  	 	 			<div class="panel panel-primary">
   		 				<div class="panel-heading">
   		 					 <strong>Catedras de {{ catedra.grouper }}º nivel </strong></div>
   		 				<div class="panel-body">	
@@ -56,13 +53,19 @@
               										<i class="icon-trash icon-white"></i> Eliminar</a>
             									 </div>
             									</div>
-            								</div>
+            								  </div>
            								</div>
            								<!-- Delete Catedra Modal -->
-  		 							<h5 class="list-group-item-heading">  {{item.nombre }} {% if item.electiva %}  <em>  Electiva </em> {% endif %}</h5>
-									<a  class="btn btn-default btn-xs" href="{% url 'catedras:catedra_edit' item.id %}"><i class="icon-pencil"> Editar</i> </a>
-	 								<a class="btn btn-info btn-xs"  href="{% url 'catedras:catedra_details' item.id %}"> <i class="icon-info-sign""> Ver detalles </i> </a>
-	 								<button type="button" data-toggle="modal" data-target="#{{item.id}}" class="btn btn-danger btn-xs" ><i class="icon-trash icon-white"> Eliminar</i></button>
+           								
+           								<div class="list-group-item">
+  		 								<a class="list-group-item-heading " href="{% url 'catedras:catedra_details' item.id %}">  
+  		 									{{item.nombre }} {% if item.electiva %}  <em>  Electiva </em> {% endif %}
+  		 								</a>
+  		 								<div class="pull-right">
+										   <a  class="btn btn-default btn-xs" href="{% url 'catedras:catedra_edit' item.id %}"><i class="icon-pencil"></i> </a>
+	 									   <button type="button" data-toggle="modal" data-target="#{{item.id}}" class="btn btn-danger btn-xs" /><i class="icon-trash icon-white"></i>
+	 									</div>
+	 								</div>
           	 						{% endfor %}
   		 					</ul>
   		 				</div>

@@ -1,14 +1,85 @@
 {% extends 'base.html' %}
 
-{% block title %} Listado de alumnos {% endblock %}
-{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
+{% block title %} Lista de alumnos {% endblock %}
+{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' /> 
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/tables.css'>
+{% endblock %}
+
+
 {% block header %}
- 	
- {% endblock %}
+	{% block alertmessage %}
+	{% if messages %} 
+    				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+              				<div class="alert alert-warning">
+    						<strong>{{ message }}  </strong> 
+    					</div>
+           			 {% endfor %} 
+	 {% endif %}
+	{% endblock %}
+{% endblock %}
 {% block content %}
-	<ul>
-    		{% for alumno in object_list %}
-        	<li>Nombre: {{ alumno.nombre }} - Carrera: {{ alumno.carrera}} </li>
-    		{% endfor %}
-	</ul>
+	<div class="container">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+			<thead>
+    				<tr>
+        				<th class="text-center">Apellido</th>        								
+        				<th class="text-center">Nombres</th>
+        				<th class="text-center">Legajo</th>        								
+        				<th class="text-center">Carrera</th>
+        				<th class="text-center">Acciones </th>
+    				</tr>
+    			  </thead>
+    			{% for alumno in alumnos %}
+				<!--DELETE Alumno modal-->
+    				<div id="{{alumno.id}}" class="modal fade" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+            				<div class="modal-dialog modal-sm">
+            					<div class="modal-content">
+            						<div class="modal-header">
+              							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              							<h4 id="myModalLabel">Dar de baja alumno </h4>
+            						</div>
+            						<div class="modal-body">
+             							<p>¿Estás seguro que deseas dar de baja al alumno <i class="text-warning">{{ alumno.apellido}}, {{alumno.nombres}} ?</i></p>
+            						</div>
+            						<div class="modal-footer">
+              							<button class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+              							<a class="btn btn-danger btn-sm" href="{% url 'alumnos:delete_alumno' alumno.id%}" data-toggle="modal">
+              								<i class="icon-trash icon-white">Eliminar </i>
+              							 </a>
+            						</div>
+            					</div>
+            				</div>
+           			</div>
+           			<!--DELETE Alumno modal-->
+				<tr> 
+					<td class="text-center"><a  href="{% url 'alumnos:alumno_details' alumno.id %}">{{alumno.apellido|title}}</td>
+        				<td class="text-center">{{alumno.nombres|title}}</td>
+        				<td class="text-center">{{alumno.legajo}}</td>
+        				<td class="text-center">{{alumno.carrera|title}}</td>
+        				<td class="text-center">
+        					<a  class="btn btn-default btn-xs" href="{% url 'alumnos:edit_alumno' alumno.id %}"><i class="icon-pencil"></i> </a>
+        					<button type="button" data-toggle="modal" data-target="#{{alumno.id}}" class="btn btn-danger btn-xs" /><i class="icon-trash icon-white"></i></button>
+        				</td>
+        				
+        			</tr>
+    			{% endfor %}
+    		</table>
+    		
+    		<div class="center-block pagination">
+    			<span class="step-links">
+        			{% if alumnos.has_previous %}
+        				<a href="?page={{ contacts.previous_page_number }}">Anterior</a>
+        			{% endif %}
+		       		<span class="current">
+            				Página {{ alumnos.number }} de {{ alumnos.paginator.num_pages }}.
+        			</span>
+        			{% if alumnos.has_next %}
+            				<a href="?page={{ contacts.next_page_number }}">Siguiente</a>
+        			{% endif %}
+    			</span>
+		</div>
+			
+	</div>
 {% endblock %}

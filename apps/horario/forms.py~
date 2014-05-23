@@ -18,25 +18,26 @@ class HorarioForm(ModelForm):
         		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label), 'invalid': "No es un formato válido, vieja."}
         		 
            	self.helper = FormHelper(self)
-           	self.helper.form_id = '{{ form_num }}'
-           	self.helper.form_class = 'form-horizontal'
+           	self.helper.form_tag = False
+               	self.helper.form_class = 'form-horizontal'
            	self.helper.label_class = 'col-lg-3'
 		self.helper.field_class = 'col-lg-4'
 		self.helper.help_inline = True
 		self.helper.layout= Layout (
            		Fieldset(
-           			'Ingrese el detalle para la catedra seleccionada',
-           			Field('comision', label='Comisión'),
+           			'Ingrese los horarios',
+           			Field('comision'),
            			Fieldset(
-           				'Info clase teorica',
+           				'Informacion clase teorica',
            				Field('prof_t', label='Prof. Teoria', placeholder='Nombre y apellido'),
            				'dia_t',
            				'hora_inicio_t',
            				'hora_fin_t',
+           				
            				css_class='col-lg-6',
            			),
            			Fieldset(
-           				'Info clase practica',
+           				'Informacion clase practica',
            				Field('prof_p', label='Prof.  Practica', placeholder='Nombre y apellido'),
            				'dia_p',
            				'hora_inicio_p',
@@ -45,11 +46,10 @@ class HorarioForm(ModelForm):
            				css_class='col-lg-6'
            			),
            			Field('ayudantes', label='Ayudantes', placeholder='ayudantes'),
-           			          			
+           			css_id='hidden'        			
            		),
-           		FormActions(
-    					HTML('<input type="submit" class="btn btn-primary"name="submit" value="Guardar"/>'),           		
-           		),
+         		self.helper.add_input(Submit('submit', 'Guardar', css_class="btn btn-primary pull-right"))
+            		
            	)
            	        	
 		

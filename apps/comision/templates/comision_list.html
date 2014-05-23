@@ -48,10 +48,13 @@
             								</div>
            								</div>
            						<!-- Delete Comision Modal -->
-  		 					<h5 class="list-group-item-heading"> Comision  {{item.numero}} - {{item.turno}}</h5>
-							<a  class="btn btn-default btn-xs" href="{% url 'comisiones:comision_edit' item.id %}"><i class="icon-pencil"> Editar </a></i>
-	 						<a class="btn btn-info btn-xs"  href="{% url 'comisiones:comision_detail' item.id %}"> <i class="icon-info-sign"> Ver detalles </i> </a>
-	 						<button type="button" data-toggle="modal" data-target="#{{item.id}}" class="btn btn-danger btn-xs" ><i class="icon-trash icon-white"> Eliminar</i></button>
+           						<div class="list-group-item">
+  		 						<a class="list-group-item-heading" href="{% url 'comisiones:comision_detail' item.id %}"> Comision  {{item.numero}} - {{item.turno}}
+  		 						<div class="pull-right">
+							            <a  class="btn btn-default btn-xs" href="{% url 'comisiones:comision_edit' item.id %}"><i class="icon-pencil"></a></i>
+	 							    <button type="button" data-toggle="modal" data-target="#{{item.id}}" class="btn btn-danger btn-xs" /><i class="icon-trash icon-white"></i>
+	 							</div>
+	 						</div>
 						{% endfor %}
   		 			</ul>
   		 		</div>

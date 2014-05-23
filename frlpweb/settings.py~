@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 import sys
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+# Add apps as template dir 
 sys.path.insert(1, os.path.join(PROJECT_ROOT, "apps"))
 
 DEFAULT_CHARSET = 'utf-8' 
@@ -58,7 +59,6 @@ INSTALLED_APPS = (
     'bootstrap3',
     'crispy_forms',
     'django_extensions',
-    'django_tables2',
     'debug_toolbar',
     'apps.main_alumno',
     'apps.comision',

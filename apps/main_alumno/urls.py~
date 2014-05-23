@@ -6,11 +6,11 @@ admin.autodiscover()
 
 urlpatterns = patterns ('main_alumno.views',
 	url(r'^addalumno/$', 'add_alumno', name='add_alumno'),
-	url(r'^alumno/editar/(?P<id>\d+)/$', 'edit_alumno', name='alumno_edit'),
+	url(r'^alumnos/editar/(?P<id>\d+)/$', 'edit_alumno', name='edit_alumno'),
 	url(r'^alumnos/$',  'ListaAlumnos', name='lista_alumnos'),
 	url(r'^alumnos/(?P<id>\d+)/detalles/$', 'alumno_details', name='alumno_details'),
 	url(r'^alumnos/buscar/$', 'search_alumno', name="search_alumno"),
-	url(r'^alumnos/search_results/$', 'search_results', name="search_results"),
+	url(r'^alumnos/buscar/results/$', 'search_results', name="search_results"),
 	url(r'^carrera/(?P<career>\w+)/$', 'alumno_by_career', name='alumno_by_career'),
 	
 )

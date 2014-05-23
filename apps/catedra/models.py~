@@ -24,14 +24,14 @@ class InfoCatedra(models.Model):
         	ordering = ['-nombre']
         	
 class Catedra(InfoCatedra):
-	options = (
+	options_nivel = (
              (1, '1'),
              (2, '2'),
              (3, '3'),
              (4, '4'),
              (5, '5'),
          )
-	nivel = models.CharField(max_length=2, choices = options) 
+	nivel = models.CharField(max_length=2,choices = options_nivel) 
 	bool_choices = ((True, 'Sí'), (False, 'No'))	
 	electiva = models.BooleanField(default ='', choices = bool_choices)	
 	carrera = models.ForeignKey('carrera.Carrera', default='')

@@ -46,29 +46,38 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	#CUSTOM CONTEXT PROCESSORS
 	'apps.carrera.context_processors.get_carreras',
 )
-# Application definition
+# APPLICATION DEFINITION
 
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'south',
-    'bootstrap3',
-    'crispy_forms',
-    'django_extensions',
-    'django_tables2',
-    'debug_toolbar',
-    'apps.main_alumno',
-    'apps.comision',
-    'apps.carrera',
-    'apps.catedra',
-    'apps.horario',
-    'apps.users',
-    
+# Django core apps
+DEFAULT_APPS = (
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
 )
+
+# Third-Party Apps needed for project
+THIRD_PARTY_APPS = (
+	'south',
+	'bootstrap3',
+    	'crispy_forms',
+    	'django_extensions',
+    	'debug_toolbar',
+)
+    
+# Created apps for project
+LOCAL_APPS = (
+	 'apps.main_alumno',
+	'apps.comision',
+    	'apps.carrera',
+    	'apps.catedra',
+    	'apps.horario',
+    	'apps.users',
+)   
+    
+INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS  
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

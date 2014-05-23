@@ -3,7 +3,7 @@
 from django.db import models
 from datetime import date
 from django.utils.encoding import smart_unicode
-from comision.models import Comision
+from apps.comision.models import Comision
 
 class Horario(models.Model): 
 	catedra = models.ForeignKey('catedra.Catedra')

@@ -7,7 +7,7 @@ from apps.comision.models import Comision
 
 class Horario(models.Model): 
 	catedra = models.ForeignKey('catedra.Catedra')
-	comision = models.ForeignKey('comision.Comision', related_name='horarios')
+	comision = models.ForeignKey('comision.Comision', verbose_name="Seleccione la comisión", related_name='horarios')
 	maniana, tarde, noche = 'maniana', 'tarde', 'noche'
 	opt_turno = (
 		(maniana, 'Mañana'),

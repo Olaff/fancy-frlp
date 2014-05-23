@@ -29,7 +29,7 @@ def add_horario(request, id_catedra): #Recibe el id de catedra que agregue
 		#redirecciono a la lista de 
 		url = reverse ('catedras:catedra_details', args=[catedra.id]) 
 		return HttpResponseRedirect(url)
-	template_vars = {'formset': formset} #Variable que le paso al contexto
+	template_vars = {'formset': formset, 'catedra': catedra} #Variable que le paso al contexto
 	return render_to_response('add_horario.html', template_vars, context_instance=RequestContext(request))
 
 #THIS IS NOT VERY DRY, FIX WHEN THE TIME COMES 
@@ -50,9 +50,8 @@ def edit_horario(request, id_catedra, id_schedule): #Recibe el id de catedra que
 		#redirecciono a la lista de 
 		url = reverse ('catedras:catedra_details', args=[catedra.id]) 
 		return HttpResponseRedirect(url)
-	template_vars = {'formset': formset, 'form_num': form_num} #Variable que le paso al contexto
+	template_vars = {'formset': formset, 'form_num': form_num, 'catedra': catedra } #Variable que le paso al contexto
 	return render_to_response('edit_horario.html', template_vars, context_instance=RequestContext(request))
-
 
 @permission_required('empleados.can_delete', raise_exception = True)
 def delete_horario(request, id_catedra, id_schedule):

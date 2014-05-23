@@ -1,7 +1,7 @@
 <!--ESTE TEMPLATE ES PARA AÑADIR LOS HORARIOS -->
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title %} Agregar horarios de la cátedra {% endblock %}
+{% block title %} Actualizar horarios de la cátedra {% endblock %}
 {% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
 	{% block header %} 
 	
@@ -13,7 +13,8 @@
 <div class="container">
   	 <div class="row-fluid">
   	 		{{formset.management_form}}  	 
-			{% crispy formset formset.form.helper %}
+  	 		 {% crispy formset formset.form.helper  %}
+			
 	</div>
 </div>
 {% endblock %}
