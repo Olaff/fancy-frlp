@@ -1,4 +1,5 @@
 #FORMS for Catedra
+#-*-encoding:utf-8 -*-
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *
@@ -11,6 +12,7 @@ class CatedraForm(ModelForm):
 		# Customizo mensaje de error para todos los campos del formulario 
         	for field in self.fields.values():
            		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label)}
+           	self.fields['correlativas'].help_text = "Mantené 'Ctrl' presionado para seleccionar más de una"
            	#CrispyForms
            	self.helper = FormHelper(self)
            	self.helper.form_class = 'form-horizontal'
@@ -24,6 +26,7 @@ class CatedraForm(ModelForm):
 					'carrera',
 					'nivel',
 					'electiva',
+					'correlativas',
 					'sylabus',
 					'jefe_catedra',
 					'jtp',

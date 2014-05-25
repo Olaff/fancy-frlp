@@ -1,0 +1,59 @@
+/*Style for multiple level dropdown AND custom dropdownMenu */
+.dropdown-submenu {
+    position: relative;
+   
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+     box-shadow: 4px 8px 25px 1px rgba(220, 220, 220, 0.68);
+    -moz-box-shadow: 4px 8px 25px 1px rgba(220, 220, 220, 0.68);
+    -webkit-box-shadow: 4px 8px 25px 1px rgba(220, 220, 220, 0.68);
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+    
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+.shadow  {
+	box-shadow: 0px 16px 25px 1px rgba(12, 10, 10, 0.68);
+	-moz-box-shadow: 0px 16px 25px 1px rgba(12, 10, 10, 0.68);
+	-webkit-box-shadow: 0px 16px 25px 1px rgba(12, 10, 10, 0.68);
+}

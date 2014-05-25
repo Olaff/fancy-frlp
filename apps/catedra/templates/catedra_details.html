@@ -21,26 +21,26 @@
 {% endblock %}
 {% block content %}
 	<div class="page-header" >
-  		<h1 class="three-dee" style="margin-left: 10px;">{{catedra.nombre}} </h1>
+  		<h1 class="main-title" style="margin-left: 10px;">{{catedra.nombre}} </h1>
 	</div>
 	<div class="container"> 
 		<div class="row-fluid">
 			<div class="col-lg-6">
-				<div class="panel panel-primary">
-					<div class="panel-heading text-center">
-						<h4>Información de la cátedra</h4> 
+				<div class="panel panel-default">
+					<div class="panel-heading  text-center">
+						<h4 class="panel-title">Información de la cátedra</h4> 
 					</div>
 					<div class="panel-body">
 						
 						<dl class="dl-horizontal">
-							  			<dt> Jefe de Cátedra :</dt>
-							  			<dd><p><strong class="three-dee">{{catedra.jefe_catedra}}</strong></p></dd>
-    										<dt> Jefe de Prácticas :</dt>    										
-   										<dd><p> <strong class="three-dee">{{catedra.jtp}} </strong></p></dd>
-   										<dt> Carrera : </dt>
-   										<dd> <p><strong class="three-dee"> {{catedra.carrera|title}}</strong> </p></dd>
-   										<dt> Nivel :</dt>
-   										<dd><p><strong class="three-dee">{{catedra.nivel}}</strong></p></dd>
+							  			<dt class="panel-detail"> Jefe de Cátedra :</dt>
+							  			<dd><em>{{catedra.jefe_catedra}}</em></dd>
+    										<dt class="panel-detail"> Jefe de Prácticas :</dt>    										
+   										<dd><em> {{catedra.jtp}} </em></p></dd>
+   										<dt class="panel-detail"> Carrera : </dt>
+   										<dd> <em> {{catedra.carrera|title}}</em></dd>
+   										<dt class="panel-detail"> Nivel :</dt>
+   										<dd><em>{{catedra.nivel}}</em></dd>
    										<dd>
    											<label class="checkbox-inline">
     												<input type="checkbox" disabled checked > Obligatoria 
@@ -49,9 +49,10 @@
   												<input type="checkbox" disabled> Electiva
   											</label>									
    										<dd>
-   											
+   										<dt class="panel-detail"> Correlativas: </dt>
+   										{% for c in catedra.correlativas.all %}<dd><a href="{% url 'catedras:catedra_details' c.id %}"> {{c}}</a></dd>  {% endfor %}
    										</dd>
-   										<dt>Syllabus :</dt>
+   										<dt class="panel-detail">Syllabus :</dt>
    										<dd>{{catedra.sylabus}}</dd>
    						</dl>
 					</div>
@@ -69,7 +70,7 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="panel panel-default">
-					<div class="panel-heading text-center"><h4>Horarios </h4></div>
+					<div class="panel-heading text-center"><h4 class="panel-title">Horarios </h4></div>
 					<div class="panel-body">
 						{% for com in catedra.comisiones.all %}			
 						<div class="list-group-item">		
@@ -138,6 +139,5 @@
 		</div>
 	</div>
 {% endblock %}
-
 
 

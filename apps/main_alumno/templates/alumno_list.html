@@ -66,20 +66,18 @@
         			</tr>
     			{% endfor %}
     		</table>
-    		
-    		<div class="center-block pagination">
-    			<span class="step-links">
-        			{% if alumnos.has_previous %}
-        				<a href="?page={{ contacts.previous_page_number }}">Anterior</a>
-        			{% endif %}
-		       		<span class="current">
+    		<ul class="center-block pager">
+    			{% if alumnos.has_previous %}
+        			<li><a href="?page={{ alumnos.previous_page_number }}">&laquo; Anterior</a></li>	
+        		{% endif %}
+        			<span class="current">
             				Página {{ alumnos.number }} de {{ alumnos.paginator.num_pages }}.
         			</span>
-        			{% if alumnos.has_next %}
-            				<a href="?page={{ contacts.next_page_number }}">Siguiente</a>
-        			{% endif %}
-    			</span>
-		</div>
-			
+  			{% if alumnos.has_next %}
+  			<li><a href="?page={{ alumnos.next_page_number }}">Siguiente &raquo;</a></li>
+  			{% endif %}  			
+		</ul>   		      			
+		
+        			
 	</div>
 {% endblock %}

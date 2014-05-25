@@ -45,7 +45,7 @@ def edit_catedra(request, id):
 			form.save()
 			messages.success(request,'Catedra modificada satisfactoriamente')
 			carrera = instance.carrera
-			url = reverse('/catedras/catedra_list', args=[carrera])
+			url = reverse('catedras:catedra_list', args=[carrera])
 			return HttpResponseRedirect(url)
 					
 	template_vars = {'form': form}

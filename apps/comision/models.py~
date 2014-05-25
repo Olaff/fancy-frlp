@@ -11,4 +11,4 @@ class Comision(models.Model):
 	
 	
 	def __unicode__(self):
-		return '%s - %s - %s ' % (self.numero, self.turno, self.carrera.nombre)
+		return '%s - %s - %s ' % (self.numero, self.turno, self.carrera.nombre.title())

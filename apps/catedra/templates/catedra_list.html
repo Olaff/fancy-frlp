@@ -29,10 +29,10 @@
   	 	<div class="col-sm-12">
   		 	{% regroup catedras|dictsort:"nivel" by nivel as catedras_list%}
   	 		{% for catedra in catedras_list %}
-  	 			<div class="col-sm-6 control-group">
+  	 			<div class="col-sm-6 panel-group">
   	 	 			<div class="panel panel-primary">
   		 				<div class="panel-heading">
-  		 					 <strong>Catedras de {{ catedra.grouper }}º nivel </strong></div>
+  		 					 <h4 class="panel-title">Catedras de {{ catedra.grouper }}º nivel </h4></div>
   		 				<div class="panel-body">	
   		 					<ul class="list-group"> 
   		 						{% for item in catedra.list|dictsort:"electiva" %}
@@ -58,8 +58,8 @@
            								<!-- Delete Catedra Modal -->
            								
            								<div class="list-group-item">
-  		 								<a class="list-group-item-heading " href="{% url 'catedras:catedra_details' item.id %}">  
-  		 									{{item.nombre }} {% if item.electiva %}  <em>  Electiva </em> {% endif %}
+  		 								<a name="catedra_details" class="list-group-item-heading " href="{% url 'catedras:catedra_details' item.id %}">  
+  		 									{{item.nombre }} {% if item.electiva %}  <font face="Tahoma" color="lightblue"> Electiva </font> {% endif %}
   		 								</a>
   		 								<div class="pull-right">
 										   <a  class="btn btn-default btn-xs" href="{% url 'catedras:catedra_edit' item.id %}"><i class="icon-pencil"></i> </a>
@@ -78,7 +78,7 @@
 {% endblock %}
 
 {% block customjs %} 
-	
+
  {% endblock%}
 
 
