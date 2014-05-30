@@ -18,14 +18,14 @@ def ListaCatedras(request, carrera): #Lista todas las cátedras recibiendo  como
 	
 
 @login_required(login_url='/login/')	
-def  CatedraDetails(request, id): #Devuelve el detalle de la cátedra seleccionada
-	catedra = get_object_or_404(Catedra, pk=id)
+def  CatedraDetails(request, slug): #Devuelve el detalle de la cátedra seleccionada
+	catedra = get_object_or_404(Catedra, slug=slug)
 	return render_to_response('catedra_details.html', {'catedra':catedra}, context_instance=RequestContext(request))
 	#queryset = Catedra.objects.filter(carrera__nombre__contains='sistemas') 
 	
 # VISTAS PARA  GESTION DE CATEDRAS
 
-@permission_required('empleados.can_add', raise_exception=True)
+
 @login_required(login_url='/login/')
 def add_catedra(request):
 	form = CatedraForm(request.POST or None, request.FILES or None)
@@ -36,10 +36,10 @@ def add_catedra(request):
 	template_vars = {'form': form}
 	return render_to_response('add_catedra.html', template_vars, context_instance=RequestContext(request))
 	
-@permission_required('empleados.can_edit', raise_exception=True)	
+
 @login_required(login_url='/login/')
-def edit_catedra(request, id):
-	instance = get_object_or_404(Catedra, id=id)
+def edit_catedra(request, slug):
+	instance = get_object_or_404(Catedra, slug=slug)
 	form = CatedraForm(request.POST or None , request.FILES or None , instance=instance)
 	if form.is_valid():
 			form.save()
@@ -51,9 +51,9 @@ def edit_catedra(request, id):
 	template_vars = {'form': form}
 	return render_to_response('edit_catedra.html', template_vars, context_instance=RequestContext(request)) 
 
-@permission_required('empleados.can_delete', raise_exception=True)	
-def delete_catedra(request,id):
-	catedra = get_object_or_404(Catedra, id=id)
+
+def delete_catedra(request,slug):
+	catedra = get_object_or_404(Catedra, slug=slug)
 	carrera = catedra.carrera
 	catedra.delete()
 	messages.success(request,'Catedra eliminada con éxito')

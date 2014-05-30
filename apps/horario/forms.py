@@ -18,8 +18,6 @@ class HorarioForm(ModelForm):
         		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label), 'invalid': "No es un formato válido, vieja."}
         		 
            	self.helper = FormHelper(self)
-           	self.helper.form_tag = False
-#           	self.helper.form_action = "{% url 'catedras:catedra_details' catedra.id %}"
            	self.helper.form_class = 'form-horizontal'
            	self.helper.label_class = 'col-lg-3'
 		self.helper.field_class = 'col-lg-4'

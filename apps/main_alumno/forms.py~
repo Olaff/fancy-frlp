@@ -55,31 +55,5 @@ class AlumnoForm(ModelForm):
 			
 		)
 
-class SearchForm(ModelForm):
-	def __init__(self, *args,**kwargs):
-		super(SearchForm, self).__init__(*args,**kwargs)
-		for field in self.fields.values():
-			field.error_messages = {'required': 'No ha ingresado nada para buscar'.format(fieldname=field.label)}
-		self.helper = FormHelper(self)
-		self.helper.form_class = 'form-horizontal'
-		self.helper.label_class = 'col-lg-3'
-		self.helper.field_class = 'col-lg-3'
-		self.helper.help_inline = True
-		self.helper.layout = Layout (
-			Fieldset(
-				'Ingrese el legajo del alumno',
-				Div(
-					
-					FormActions(
-					HTML('<input type="text" class="col-lg-3 form-control" placeholder="Legajo" name="search" value="Buscar"> <span class="glyphicon glyphicon-search"></span></button>'),
-					HTML('<button type="submit" class="btn btn-default" name="search" value="Buscar"> <span class="glyphicon glyphicon-search"></span></button>'),
-					),
-				css_class = 'form-group'
-				),
-			),	
-		)
-		
-	class Meta:
-		model = Alumno
 
 	

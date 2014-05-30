@@ -9,7 +9,7 @@ $(document).ready(function() {
 	if (footerTop < docHeight) {
 		$('#footer').css('margin-top', 10 + (docHeight - footerTop) + 'px');
 	}
-			
+		
 	$('#jumpback').click(function () {
 		$('body,html').animate({
 			scrollTop: 0

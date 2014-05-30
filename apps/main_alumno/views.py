@@ -13,7 +13,7 @@ from apps.carrera.models import Carrera
 from apps.comision.models import Comision
              		  
 #GESTION DE ALUMNOS
-@permission_required('empleados.can_add', raise_exception=True)
+@permission_required('GenericUser.can_add', raise_exception=True)
 @login_required(login_url='/login/')	
 def add_alumno(request):
 	form = AlumnoForm(request.POST or None)

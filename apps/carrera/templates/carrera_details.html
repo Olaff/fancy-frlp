@@ -9,11 +9,7 @@
 {% block content %}
 	<div class="page-header" >
   		<h1 class="main-title" style="margin-left: 10px;">
-  						{% if  "sistema" in carrera.nombre %} 
-	  						Ingeniería  en {{carrera.nombre|title}} de Información
-	  					{% else %}
-	  						Ingeniería {{carrera.nombre|title}}
-	  					{% endif %}
+  						{{carrera.get_title}}
 	  	</h1>
 	</div>
 	<div class="container"> 

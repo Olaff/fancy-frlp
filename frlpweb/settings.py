@@ -137,8 +137,14 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT ,'uploads/alumnosweb')
 # Integrar crispy con bootstrap 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-# URL para redireccionar despues de loguearse
-LOGIN_REDIRECT_URL = '/'
+# CUSTOM users & backend 
+AUTH_USER_MODEL = 'users.GenericUser'
+AUTHENTICATION_BACKENDS = (
+	'apps.users.backends.EmailAuth',
+	'apps.users.backends.LegajoAuth',
+#	'django.contrib.auth.backends.ModelBackend',
+)
+
 
 DATE_INPUT_FORMATS = ('%d-%m-%Y', '%d/%m/%Y', '%d/%m/%y', '%d %b %Y',
                       '%d %b, %Y', '%d %b %Y', '%d %b, %Y', '%d %B, %Y',

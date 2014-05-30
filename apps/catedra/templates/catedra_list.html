@@ -49,7 +49,7 @@
             									 </div>
             									 <div class="modal-footer">
               										<button class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-              										<a class="btn btn-danger btn-sm" href="{% url 'catedras:catedra_delete' item.id%}" data-toggle="modal">
+              										<a class="btn btn-danger btn-sm" href="{% url 'catedras:catedra_delete' item.slug %}" data-toggle="modal">
               										<i class="icon-trash icon-white"></i> Eliminar</a>
             									 </div>
             									</div>
@@ -58,12 +58,15 @@
            								<!-- Delete Catedra Modal -->
            								
            								<div class="list-group-item">
-  		 								<a name="catedra_details" class="list-group-item-heading " href="{% url 'catedras:catedra_details' item.id %}">  
-  		 									{{item.nombre }} {% if item.electiva %}  <font face="Tahoma" color="lightblue"> Electiva </font> {% endif %}
+  		 								<a name="catedra_details" class="list-group-item-heading " href="{{item.get_absolute_url}}">  
+  		 									{{item.nombre }} 
   		 								</a>
   		 								<div class="pull-right">
-										   <a  class="btn btn-default btn-xs" href="{% url 'catedras:catedra_edit' item.id %}"><i class="icon-pencil"></i> </a>
-	 									   <button type="button" data-toggle="modal" data-target="#{{item.id}}" class="btn btn-danger btn-xs" /><i class="icon-trash icon-white"></i>
+  		 								   <a  class="btn btn-default btn-xs" href="{% url 'catedras:catedra_edit' item.slug %}"><i class="icon-pencil"></i> </a>
+  		 								   {% if item.electiva %}
+  		 								   	<a class="btn btn-info btn-xs"> Electiva </a>
+										        <button name="delete" type="button" data-toggle="modal" data-target="#{{item.id}}" class="btn btn-danger btn-xs" /><i class="icon-trash icon-white"></i>
+										   {% endif %}
 	 									</div>
 	 								</div>
           	 						{% endfor %}

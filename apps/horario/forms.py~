@@ -19,7 +19,8 @@ class HorarioForm(ModelForm):
         		 
            	self.helper = FormHelper(self)
            	self.helper.form_tag = False
-               	self.helper.form_class = 'form-horizontal'
+#           	self.helper.form_action = "{% url 'catedras:catedra_details' catedra.id %}"
+           	self.helper.form_class = 'form-horizontal'
            	self.helper.label_class = 'col-lg-3'
 		self.helper.field_class = 'col-lg-4'
 		self.helper.help_inline = True
@@ -48,7 +49,7 @@ class HorarioForm(ModelForm):
            			Field('ayudantes', label='Ayudantes', placeholder='ayudantes'),
            			css_id='hidden'        			
            		),
-         		self.helper.add_input(Submit('submit', 'Guardar', css_class="btn btn-primary pull-right"))
+#           		self.helper.add_input(Submit('submit', 'Guardar', css_class="btn btn-primary pull-right"))
             		
            	)
            	        	

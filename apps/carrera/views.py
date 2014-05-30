@@ -21,8 +21,8 @@ def add_carrera(request):
 
 @login_required(login_url='/login/')
 @permission_required('empleados.can_edit', raise_exception=True)
-def edit_carrera(request, id):
-	instance = get_object_or_404(Carrera, id=id)
+def edit_carrera(request, slug):
+	instance = get_object_or_404(Carrera, slug=slug)
 	form = CarreraForm(request.POST or None , instance=instance)
 	if form.is_valid():
 			form.save()
@@ -39,6 +39,6 @@ def carrera_list(request):
 	return render_to_response('carrera_list.html', template_vars, context_instance=RequestContext(request))
 
 @login_required(login_url='/login/')	
-def carrera_details(request, id):
-	carrera = get_object_or_404(Carrera, id=id)
+def carrera_details(request, slug):
+	carrera = get_object_or_404(Carrera, slug=slug)
 	return render_to_response('carrera_details.html', {'carrera':carrera}, context_instance=RequestContext(request))

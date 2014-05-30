@@ -13,16 +13,23 @@
 
 <div class="container">
   	 <div class="row-fluid">  	 	
-  	   	 		{{formset.management_form}}  	 
-				{% crispy formset formset.form.helper %}
-            			
+  	   	 		{{formset.management_form|crispy}}  	 
+				{% for form in formset %}
+					{% if form.num|add:0 == form.instance.id%}
+						{% crispy form %}
+            				{% else %}
+            					<div id="hidden">
+            						{% crispy form %}
+            					</div>
+            				{% endif %}	
+            			{% endfor %}
 	 </div>
 </div>
 {% endblock %}
 {% block customjs %}
-<!--	<script type="text/javascript" >-->
-<!--        $( document ).ready(function(event) {-->
-<!--		$('#hidden').toggle();-->
-<!--         });-->
-<!--    </script>-->
+<script type="text/javascript" >
+        $( document ).ready(function(event) {
+		$('#hidden').toggle();
+         });
+    </script>
 {% endblock %}

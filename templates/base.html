@@ -20,7 +20,7 @@
 		<footer id="footer">
 			<hr>
 			<div class="container">
-				<a class="btn btn-primary btn-sm" href="#topbar" id="jumpback">&#8593 </a>					
+				<a name="top" class="btn btn-primary btn-sm" href="#topbar" id="jumpback">&#8593 </a>					
 				<div class="text-center">   				     			  
 				     <h5 class="text-muted">&copy; 2014 Olaff_ - Django.</h5>
 				</div>
@@ -29,6 +29,7 @@
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src='{{STATIC_URL}}js/fade-forms.js'></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/footer.js"></script>		
 		{% block customjs %} {% endblock %} 
 	</body>

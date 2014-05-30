@@ -1,10 +1,11 @@
 #URLS for user handling
 from django.conf.urls import patterns, include, url
-from django.contrib.auth.views import login 
-from apps.users.forms import LoginForm
 
 urlpatterns = patterns('apps.users.views',
-	url(r'^$', 'index', name='index'),
-	url(r'^login/$', login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
-	url(r'^logout/$', 'logout_user', name='logout'),
+	url(r'^$', 'landing', name="landing_page"),
+#	url(r'^employee$', 'employee_index', name='employee_index'),
+	url(r'^/employee/login$', 'employee_login', name='employee_login'),
+	url(r'^/student/login$', 'student_login', name='student_login'),	
+	url(r'^logout$', 'logout', name='logout'),
+	
 )

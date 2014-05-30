@@ -11,7 +11,7 @@
                 			<span class="icon-bar"></span>
                     			<span class="icon-bar"></span>
        				</button>
-       			      <a class="navbar-brand" href="{% url 'users:index' %}"> <i class="icon-home"></i> AlumnosWeb</a>
+       			      <a class="navbar-brand" href="#"> <i class="icon-home"></i> AlumnosWeb</a>
 			    <!-- End header -->
        			    </div>
 			  <!-- Navbar collapse  -->
@@ -81,14 +81,14 @@
 					</li>
 					<ul class="navbar-right"> 
 						<div class="navbar-right btn-group navbar-btn">
-                    					<button class="btn btn-default"><span class="glyphicon glyphicon-user"></span> Bienvenido,<strong>{{user.username|title}} </strong></li>
+                    					<button class="btn btn-default"><span class="glyphicon glyphicon-user"></span> Bienvenido,<strong>{{user.get_name|title}} </strong></li>
                     					<button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="glyphicon glyphicon-cog"></span></button>
                     					<ul class="dropdown-menu">
                       						<li><a href="#">Action</a></li>
                       						<li><a href="#">Another action</a></li>
                       						<li><a href="#">Something else here</a></li>
                       						<li class="divider"></li>
-                      						<li><a name="logout" href="{% url 'users:logout_user' %}">Salir </a></li>	
+                      						<li><a name="logout" href="{% url 'users:logout' %}">Salir </a></li>	
                     					</ul>
                   				</div>
             				</ul>

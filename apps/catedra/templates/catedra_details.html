@@ -42,15 +42,24 @@
    										<dt class="panel-detail"> Nivel :</dt>
    										<dd><em>{{catedra.nivel}}</em></dd>
    										<dd>
-   											<label class="checkbox-inline">
-    												<input type="checkbox" disabled checked > Obligatoria 
-  											</label> 
-  											<label class="checkbox-inline">
-  												<input type="checkbox" disabled> Electiva
-  											</label>									
+   											{% if  not catedra.electiva %}
+   												<label class="checkbox-inline">
+    													<input type="checkbox" disabled checked > Obligatoria 
+  												</label> 
+  												<label class="checkbox-inline">
+  													<input type="checkbox" disabled> Electiva
+  												</label>	
+  											{% else %}
+  												<label class="checkbox-inline">
+    													<input type="checkbox" disabled> Obligatoria 
+  												</label> 
+  												<label class="checkbox-inline">
+  													<input type="checkbox" disabled checked> Electiva
+  												</label>
+  											{% endif %}									
    										<dd>
    										<dt class="panel-detail"> Correlativas: </dt>
-   										{% for c in catedra.correlativas.all %}<dd><a href="{% url 'catedras:catedra_details' c.id %}"> {{c}}</a></dd>  {% endfor %}
+   										{% for cathedra in catedra.correlativas.all %}<dd><a href="{{cathedra.get_absolute_url}}"> {{cathedra.nombre}}</a></dd>  {% endfor %}
    										</dd>
    										<dt class="panel-detail">Syllabus :</dt>
    										<dd>{{catedra.sylabus}}</dd>

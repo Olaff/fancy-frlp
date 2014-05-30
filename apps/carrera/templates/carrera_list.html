@@ -39,11 +39,11 @@
 	  				</div>
 	  				<div class="panel-body">	
 	  					<ul class="list-group"> 
-	  							<a class="list-group-item" href="{% url 'carreras:edit_carrera' carrera.id %}">
+	  							<a class="list-group-item" href="{% url 'carreras:edit_carrera' carrera.slug %}">
 	  								<h5 class="list-group-item-heading"><i class="icon-edit"> Editar </i></h5>
 									<small class="list-group-item-text"> Pulse aquí para editar la información de la carrera </small>
 								</a>
-		  						<a  class="list-group-item" href="{% url 'carreras:carrera_details' carrera.id %}">
+		  						<a  class="list-group-item" href="{{carrera.get_absolute_url}}">
 		  							<h5 class="list-group-item-heading"> <i class="icon-info-sign"> Ver detalles</i> </h5>	
 									<small class="list-group-item-text">Permite ver el plan de estudio, título intermedio e incumbencias profesionales</small>
 								

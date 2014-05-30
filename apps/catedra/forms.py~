@@ -12,7 +12,7 @@ class CatedraForm(ModelForm):
 		# Customizo mensaje de error para todos los campos del formulario 
         	for field in self.fields.values():
            		field.error_messages = {'required':'Este campo es obligatorio'.format(fieldname=field.label)}
-           	self.fields['correlativas'].help_text = "Mantén 'ctrl' presionado para seleccionar más de una"
+           	self.fields['correlativas'].help_text = "Mantené 'Ctrl' presionado para seleccionar más de una"
            	#CrispyForms
            	self.helper = FormHelper(self)
            	self.helper.form_class = 'form-horizontal'

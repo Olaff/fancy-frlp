@@ -7,20 +7,13 @@
  {% endblock %}
 {% block content %}
 <div class="container">
-   <div class="row-fluid">  	 
+   <div class="row-fluid">
+   	<div class="well clearfix">
 			{% csrf_token %}
 			{% crispy form %}
+	</div>
    </div>	
 </div>
 {% endblock %}
 
-{% block customjs %}
-	<script type="text/javascript">
-	$( document ).ready(function( event ) {
-		$('.form-horizontal').toggle();
-		$('.form-horizontal').fadeIn( 1250 );
-		event.preventDefault();
-    	
-	});
-	</script>
-{% endblock %}
+

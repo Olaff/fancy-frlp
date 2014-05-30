@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from django_extensions.db.fields import AutoSlugField
 from django.utils.encoding import smart_unicode
+from django.core.urlresolvers import reverse
 
 
 class InfoCatedra(models.Model):
@@ -23,6 +24,12 @@ class InfoCatedra(models.Model):
 	def filename(self):
         	return os.path.basename(self.file.name)
         	
+        def save(self, *args, **kwargs):
+        	if not self.id:
+                	#Only set the slug when the object is created.
+            		self.slug = slugify(self.nombre) #Or whatever you want the slug to use
+        	super(Blog, self).save(*args, **kwargs)
+        	
 class Catedra(InfoCatedra):
 	options_nivel = (
              ('1', '1'),
@@ -32,13 +39,12 @@ class Catedra(InfoCatedra):
              ('5', '5'),
          )
 	nivel = models.CharField(max_length=2,choices = options_nivel)
-	correlativas = models.ManyToManyField('self', related_name="correlate", verbose_name="Correlativas") 
+	correlativas = models.ManyToManyField('self', symmetrical=False, blank=True, related_name="correlate", verbose_name="Correlativas") 
 	bool_choices = ((True, 'Sí'), (False, 'No'))	
 	electiva = models.BooleanField(default ='', choices = bool_choices)	
 	carrera = models.ForeignKey('carrera.Carrera', default='')
 	sylabus = models.FileField(upload_to='alumnosweb/', blank=True)
 	comisiones = models.ManyToManyField('comision.Comision', related_name="catedras", through = 'horario.Horario')
 	
-	def get_correlativas(self):
-		for c in self.correlativas.all():
-			return c
+	def get_absolute_url(self):
+		return reverse('catedras:catedra_details', args=[self.slug])

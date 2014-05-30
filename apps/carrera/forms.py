@@ -8,7 +8,11 @@ from crispy_forms.layout import *
 from crispy_forms.bootstrap import FormActions
 from main_alumno.models import *
 
-class CarreraForm(ModelForm):
+class CarreraForm(ModelForm):		
+	class Meta:
+		model = Carrera
+		exclude= ["slug"]
+		
 	def __init__(self, *args, **kwargs): #Reimplemento el constructor 
         	super(CarreraForm, self).__init__(*args, **kwargs) #Llamo al padre
 		# Customizo mensaje de error para todos los campos del formulario 
@@ -31,12 +35,8 @@ class CarreraForm(ModelForm):
            		
            	        FormActions(
     				HTML('<input type="submit" class="btn btn-inverse" name="submit" value="Guardar"/>'),
-    				HTML('<input type="reset" class="btn btn-default" name="reset" value="Borrar"/>'),
-    				HTML("""<a class="btn btn-default" href="{% url 'users:index' %}">Cancelar</a>"""),
+    				HTML("""<a class="btn btn-default" href="{% url 'users:employee_index' %}">Volver a inicio</a>"""),
     				css_class = 'pull-right',
 			),
 		)
-	
-	class Meta:
-		model = Carrera
-		exclude= ["slug"]
+
