@@ -28,7 +28,7 @@ class InfoCatedra(models.Model):
         	if not self.id:
                 	#Only set the slug when the object is created.
             		self.slug = slugify(self.nombre) #Or whatever you want the slug to use
-        	super(Blog, self).save(*args, **kwargs)
+        	super(Catedra, self).save(*args, **kwargs)
         	
 class Catedra(InfoCatedra):
 	options_nivel = (

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} AlumnosWeb {% endblock %}
+{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/multidropdown.css' />
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> 
+{% endblock %}
+{% block header %}
+		{% block alertmessage %}
+			{% if messages %}     				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+            				<div class="container">
+            				     <div class="col-sm-12">
+              				        <div class="alert alert-info alert-dismissable">
+              					     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    						     <strong>{{ message }}  </strong> 
+    					       </div>
+    					     </div>
+    					</div>  
+           			 {% endfor %} 
+			 {% endif %}
+		{% endblock %}
+{% endblock%}
+{% block navigation %}
+<nav class="navbar navbar-default navbar-fixed-top"></nav>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+    	<div class="col-sm-8">
+    	    <img class="img-responsive" src="{{ STATIC_URL }}img/login_banner.png" alt="AlumnosWeb Logo" style="margin-top: 60px" />
+    	    	<h4 class="text-left text-justify" style="position:absolute; top: 230px;  left: 279px"> 
+   	    	    <small> 
+   		        <p class="login-title">
+		    	    Disfrutá del sitio donde podés ver toda la información relacionada con tu actividad académica.<hr>
+		        </p>
+		        <p class="login-title">
+		            El nombre de usuario y tu contraseña serán dados cuando recibas la Libreta Universitaria. 
+		        </p>
+	            </small>
+	        </h4>	
+      	</div>
+      	<div class="col-sm-4">
+      		<div class="well clearfix shadow" style="margin-top: 150px; height: 300px; width: 330px; border-radius:5%;">
+				{% crispy form form.helper %}	
+  				{% csrf_token %}
+  			</div>
+		</div>
+	</div>
+</div> <!-- /container -->
+{% endblock%}
+
+{% block customjs %}
+	<script type="text/javascript">
+		$( document ).ready(function(event) {
+			$(".alert-dismissable").fadeOut('slow');
+		});
+	</script>
+{% endblock %}

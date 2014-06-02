@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
-{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' > {% endblock %}
+{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' > 
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/collapse-panels.css' > 
+{% endblock %}
 
 	{% block header %}
 		{% block alertmessage %}
@@ -33,35 +36,37 @@
 	  	 	</div>
 	  	 	{% for carrera in carreras %}
 	  	 	<div class="col-lg-6 control-group">
-	  		 	<div class="panel panel-primary">
-	  				<div class="panel-heading text-center"> 
-	  					<h4>{{carrera.get_title}}</h4>
-	  				</div>
-	  				<div class="panel-body">	
-	  					<ul class="list-group"> 
-	  							<a class="list-group-item" href="{% url 'carreras:edit_carrera' carrera.slug %}">
-	  								<h5 class="list-group-item-heading"><i class="icon-edit"> Editar </i></h5>
-									<small class="list-group-item-text"> Pulse aquí para editar la información de la carrera </small>
-								</a>
-		  						<a  class="list-group-item" href="{{carrera.get_absolute_url}}">
-		  							<h5 class="list-group-item-heading"> <i class="icon-info-sign"> Ver detalles</i> </h5>	
-									<small class="list-group-item-text">Permite ver el plan de estudio, título intermedio e incumbencias profesionales</small>
-								
-								</a>
-								 <a  class="list-group-item"" href="{% url 'alumnos:alumno_by_career' carrera.nombre %}">
-									<h5 class="list-group-item-heading"> <i class="icon-group"> Ver alumnos inscriptos </i></h5>
-									<small class="list-group-item-text">Permite ver la cantidad de alumnos inscriptos en una carrera </small>
-								</a>
-			 				
-						</ul>
+	  	 		<div class="panel-group" id="accordion">
+	  		 		<div class="panel panel-default" id="panel{{carrera.id}}">
+	  					<div class="panel-heading text-center"> 
+	  						<h4 class="panel-title">
+	  							<a data-toggle="collapse" data-target="#collapse{{carrera.id}}"  href="#{{carrera.id}}">
+          							{{carrera.get_title}}
+        						</a>
+        					</h4>
+	  					</div>
+	  					<div id="collapse{{carrera.id}}" class="panel-collapse collapse">
+	  						<div class="panel-body">	
+	  							<ul class="list-group"> 
+	  									<a class="list-group-item" href="{% url 'carreras:edit_carrera' carrera.slug %}">
+	  										<h5 class="list-group-item-heading"><i class="icon-edit"> Editar </i></h5>
+											<small class="list-group-item-text"> Pulse aquí para editar la información de la carrera </small>
+										</a>
+		  								<a  class="list-group-item" href="{{carrera.get_absolute_url}}">
+		  									<h5 class="list-group-item-heading"> <i class="icon-info-sign"> Ver detalles</i> </h5>	
+											<small class="list-group-item-text">Permite ver el plan de estudio, título intermedio e incumbencias profesionales</small>
+										</a>
+										 <a  class="list-group-item"" href="{% url 'alumnos:alumno_by_career' carrera.nombre %}">
+											<h5 class="list-group-item-heading"> <i class="icon-group"> Ver alumnos inscriptos </i></h5>
+											<small class="list-group-item-text">Permite ver la cantidad de alumnos inscriptos en una carrera </small>
+										</a>
+			 					</ul>
+  							</div>
+  						</div>
   					</div>
-  				</div>
+				</div>
 			</div>
 			{% endfor %}
-			
 		</div>
 	</div>
-	
-		
-	
 {% endblock%}

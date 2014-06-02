@@ -26,6 +26,21 @@ class EmployeeAuthenticationForm(forms.Form):
            		}
 		#CrispyForms
 		self.helper = FormHelper(self)
+		self.helper.layout = Layout(
+			Fieldset(
+				'Ingrese al sistema',
+				HTML('<hr>'),
+				Field('email', placeholder='Correo electrónico'),
+				Field('password', label='Contraseña', placeholder='Contraseña'),
+			),
+			FormActions(
+				Div (
+					HTML('<input type="submit" class="btn  btn-default" name="submit" value="Entrar"/>'),
+					HTML("""<a class="btn btn-info" href="#">Registrarse!</a>"""),
+					css_class = 'pull-right'
+				),				
+			),
+		)
 
 class StudentAuthenticationForm(forms.Form):
 	"""
@@ -38,7 +53,7 @@ class StudentAuthenticationForm(forms.Form):
         	fields = ['legajo', 'password']
         
         def __init__(self, *args, **kwargs): #Reimplemento el constructor 
-        	super(StudentAuthenticationForm self).__init__(*args, **kwargs) #Llamo al padre
+        	super(StudentAuthenticationForm, self).__init__(*args, **kwargs) #Llamo al padre
 		# Customizo mensaje de error para todos los campos del formulario 
         	for field in self.fields.values():
            		field.error_messages = {

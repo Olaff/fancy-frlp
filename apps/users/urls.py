@@ -2,10 +2,9 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('apps.users.views',
-	url(r'^$', 'landing', name="landing_page"),
-#	url(r'^employee$', 'employee_index', name='employee_index'),
-	url(r'^employee/login$', 'employee_login', name='employee_login'),
-	url(r'^student/login$', 'student_login', name='student_login'),	
+	url(r'^$', 'index', name="index"),
+	url(r'^login$', 'login', name='login'),
+#	url(r'^student/login$', 'student_login', name='student_login'),	
 	url(r'^logout$', 'logout', name='logout'),
 	
 )

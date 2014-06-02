@@ -30,7 +30,7 @@ def  CatedraDetails(request, slug): #Devuelve el detalle de la cátedra seleccio
 def add_catedra(request):
 	form = CatedraForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
-		new_catedra = form.save()
+		new_catedra = form.save(commit=False)
 		messages.success(request,' La catedra fue agregada exitosamente')
 		return HttpResponseRedirect(reverse('catedras:catedra_details', args=[new_catedra.id])) #Redirecciona a la vista para agregar los horarios
 	template_vars = {'form': form}

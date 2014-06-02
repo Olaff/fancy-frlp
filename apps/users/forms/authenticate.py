@@ -26,6 +26,20 @@ class EmployeeAuthenticationForm(forms.Form):
            		}
 		#CrispyForms
 		self.helper = FormHelper(self)
+		self.helper.layout = Layout(
+			Fieldset(
+				'Ingrese al sistema',
+				Field('email', placeholder='Correo electrónico'),
+				Field('password', label='Contraseña', placeholder='Contraseña'),
+			),
+			FormActions(
+				Div (
+					HTML('<input type="submit" class="btn  btn-default" name="submit" value="Entrar"/>'),
+					HTML("""<a class="btn btn-info" href="#">Registrarse!</a>"""),
+					css_class = 'pull-right'
+				),				
+			),
+		)
 
 class StudentAuthenticationForm(forms.Form):
 	"""

@@ -136,9 +136,11 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT ,'uploads/alumnosweb')
 
 # Integrar crispy con bootstrap 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 # CUSTOM users & backend 
 AUTH_USER_MODEL = 'users.GenericUser'
+
 AUTHENTICATION_BACKENDS = (
 	'apps.users.backends.EmailAuth',
 	'apps.users.backends.LegajoAuth',

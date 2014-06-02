@@ -31,7 +31,7 @@ class EmailAuth(AuthBackend):
 class LegajoAuth(AuthBackend):
 	def get_user(self, user_id):
 		try:
-			user = GenericUser.objects.get(pk=user_id)
+			user =GenericUser.objects.get(pk=user_id)
 			if user.is_active:
 				return user
 			return None
@@ -40,7 +40,8 @@ class LegajoAuth(AuthBackend):
 				
 	def authenticate(self, legajo=None, password=None):
 		try: 
-			user = GenericUser.objects.get(legajo=legajo)
+			print "LALALALALAL"
+			user = GenericUser.objects.get(legajo=legajo)			
 			if user.check_password(password):
 				return user
 		except GenericUser.DoesNotExist:

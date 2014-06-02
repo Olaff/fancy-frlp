@@ -43,12 +43,4 @@ class GenericUser(AbstractBaseUser, PermissionsMixin):
 		return self.first_name
 		
 	objects = GenericUserManager()
-
 	
-class Student(GenericUser):
-	pass
-	
-class Employee(GenericUser):
-	pass
-	
-
