@@ -44,7 +44,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	"django.contrib.messages.context_processors.messages",
 	'django.core.context_processors.request',
 	#CUSTOM CONTEXT PROCESSORS
-	'apps.carrera.context_processors.get_carreras',
+	'apps.employee.carrera.context_processors.get_carreras',
 )
 # APPLICATION DEFINITION
 
@@ -69,11 +69,11 @@ THIRD_PARTY_APPS = (
     
 # Created apps for project
 LOCAL_APPS = (
-	 'apps.main_alumno',
-	'apps.comision',
-    	'apps.carrera',
-    	'apps.catedra',
-    	'apps.horario',
+	 'apps.employee.catedra',
+	'apps.employee.comision',
+    	'apps.employee.carrera',
+    	'apps.employee.horario',
+    	'apps.student.main_alumno',
     	'apps.users',
 )   
     

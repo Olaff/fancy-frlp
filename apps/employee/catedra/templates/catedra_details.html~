@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block title %} Detalles de Cátedra {% endblock %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' > {% endblock %}
+
+{% block header %}
+	{% block alertmessage %}
+	{% if messages %} 
+    				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+              				<div class="container">
+            					<div class="col-sm-12 pull-left">
+              						<div class="alert alert-info dismissable">
+              							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    								<span class="text-center"><strong>{{ message }}  </strong> </span>
+    							</div>
+    						</div>
+    					</div>
+           			 {% endfor %} 
+	 {% endif %}
+	{% endblock %}
+{% endblock %}
+{% block content %}
+	<div class="page-header" >
+  		<h1 class="main-title" style="margin-left: 10px;">{{catedra.nombre}} </h1>
+	</div>
+	<div class="container"> 
+		<div class="row-fluid">
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading  text-center">
+						<h4 class="panel-title">Información de la cátedra</h4> 
+					</div>
+					<div class="panel-body">
+						
+						<dl class="dl-horizontal">
+							  			<dt class="panel-detail"> Jefe de Cátedra :</dt>
+							  			<dd><em>{{catedra.jefe_catedra}}</em></dd>
+    										<dt class="panel-detail"> Jefe de Prácticas :</dt>    										
+   										<dd><em> {{catedra.jtp}} </em></p></dd>
+   										<dt class="panel-detail"> Carrera : </dt>
+   										<dd> <em> {{catedra.carrera|title}}</em></dd>
+   										<dt class="panel-detail"> Nivel :</dt>
+   										<dd><em>{{catedra.nivel}}</em></dd>
+   										<dd>
+   											{% if  not catedra.electiva %}
+   												<label class="checkbox-inline">
+    													<input type="checkbox" disabled checked > Obligatoria 
+  												</label> 
+  												<label class="checkbox-inline">
+  													<input type="checkbox" disabled> Electiva
+  												</label>	
+  											{% else %}
+  												<label class="checkbox-inline">
+    													<input type="checkbox" disabled checked > Obligatoria 
+  												</label> 
+  												<label class="checkbox-inline">
+  													<input type="checkbox" disabled> Electiva
+  												</label>
+  											{% endif %}									
+   										<dd>
+   										<dt class="panel-detail"> Correlativas: </dt>
+   										{% for cathedra in catedra.correlativas.all %}<dd><a href="{{cathedra.get_absolute_url}}"> {{cathedra.nombre}}</a></dd>  {% endfor %}
+   										</dd>
+   										<dt class="panel-detail">Syllabus :</dt>
+   										<dd>{{catedra.sylabus}}</dd>
+   						</dl>
+					</div>
+					<div class="panel-footer">
+						<dl class="dl-horizontal">
+							<dt>Sitio web : </dt>
+							<dd>
+								<a href="{{catedra.sitio}}" > 
+									{{catedra.sitio}}
+								</a>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading text-center"><h4 class="panel-title">Horarios </h4></div>
+					<div class="panel-body">
+						{% for com in catedra.comisiones.all %}			
+						<div class="list-group-item">		
+							<h4>Comisión {{com.numero}}</h4>
+							 	{% for schedule in com.horarios.all %}
+							 		<!-- Delete Horario  MODAL-->
+            								<div id="{{schedule.id}}" class="modal fade" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+            								  <div class="modal-dialog modal-sm">
+            								  	<div class="modal-content">
+            									 <div class="modal-header">
+              										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              										<h4 id="myModalLabel">Eliminar Cátedra</h4>
+            									 </div>
+            									 <div class="modal-body">
+             										<p>¿Estás seguro que deseas eliminar el horario de la <i class="text-warning">comisión  {{ com.numero }} ?</i></p>
+            									 </div>
+            									 <div class="modal-footer">
+              										<button class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+              										<a class="btn btn-danger btn-sm" href="{% url 'horarios:delete_horario' catedra.id schedule.id %}" data-toggle="modal">
+              										<i class="icon-trash icon-white"></i> Eliminar</a>
+            									 </div>
+            									</div>
+            								</div>
+           								</div>
+           								<!-- Delete Horario Modal -->
+								  	<dl class="dl-horizontal">
+							  			<dt>Turno: </dt>
+							  			<dd> <span class="three-dee">{{com.turno }} </span></dd>
+    										<dt >Prof. Teoría:</dt>
+   										<dd> <span class="three-dee">{{schedule.prof_t}}</span></dd>
+   										<dt>Prof. Práctica: </dt>
+   										<dd> <span class="three-dee">{{schedule.prof_p}}</span></dd>
+   									</dl>
+   								<table class="table table-striped table-bordered">
+							  	  <thead>
+    									<tr>
+        									<th>Día Teoría</th>        								
+        									<th>Horario</th>
+        									<th>Día Práctica</th>        								
+        									<th>Horario</th>
+    									</tr>
+    								  </thead>
+							  		<tr> 
+        									<td>{{schedule.dia_t|title}}</td>
+        									<td>{{schedule.hora_inicio_t|time:"H:i"}} - {{schedule.hora_fin_t|time:"H:i"}}</td>
+        									<td>{{schedule.dia_p|title}}</td>
+        									<td>{{schedule.hora_inicio_p|time:"H:i"}} - {{schedule.hora_fin_p|time:"H:i"}}</td>
+    									</tr>
+    								</table>
+    								<a id="edit" class="btn btn-sm btn-default" href="{% url 'horarios:edit_horario' catedra.id schedule.id %}" ><i class="icon-pencil"> Editar </i> </a>
+ 								<button type="button" data-toggle="modal" data-target="#{{schedule.id}}" class="btn btn-sm btn-danger" ><i class="icon-trash icon-white"> Eliminar </i></button> 
+								{% endfor %}
+    						</div>
+    						{% endfor %}
+    					</div>
+					<div class="panel-footer">
+						<div class="btn-group btn-group-justified">
+ 							<a class="btn  btn-default" href="{% url 'horarios:add_horario' catedra.id %}"> Agregar horario </a>
+ 						</div>
+ 						
+ 						
+ 						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+

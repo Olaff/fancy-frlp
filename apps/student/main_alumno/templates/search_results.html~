@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Buscar alumno  {% endblock %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
+{% block header %}
+	
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% block alertmessage %}
+			{% if messages %}     				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+            				<div class="container">
+            				     <div class="col-sm-12">
+              				        <div class="alert alert-warning alert-dismissable">
+              					     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    						     <strong>{{ message }}  </strong> 
+    					       </div>
+    					     </div>
+    					</div>  
+           			 {% endfor %} 
+           		 {% else %}
+           		 	<p> {{alumno.get_full_name}} Legajo {{alumno.legajo}}</p>
+			 {% endif %}
+		{% endblock %}
+	</div>
+{% endblock %}

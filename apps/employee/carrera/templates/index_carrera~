@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %} AlumnosWeb {% endblock %}
+{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/multidropdown.css' />
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/fixcolumn.css' /> 
+{% endblock %}

@@ -69,11 +69,11 @@ THIRD_PARTY_APPS = (
     
 # Created apps for project
 LOCAL_APPS = (
-	 'apps.main_alumno',
-	'apps.comision',
-    	'apps.carrera',
-    	'apps.catedra',
-    	'apps.horario',
+	 'apps.employee.catedra',
+	'apps.employee.comision',
+    	'apps.employee.carrera',
+    	'apps.employee.horario',
+    	'apps.student.main_alumno',
     	'apps.users',
 )   
     
@@ -140,7 +140,7 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 
 # CUSTOM users & backend 
 AUTH_USER_MODEL = 'users.GenericUser'
-AUTH_USER_MODEL = 'users.StudentUser'
+
 AUTHENTICATION_BACKENDS = (
 	'apps.users.backends.EmailAuth',
 	'apps.users.backends.LegajoAuth',

@@ -1,0 +1,91 @@
+% extends 'base.html' %}
+
+{% block title %} Lista de cátedras {% endblock %}
+
+{% block header %}
+	<ol class="breadcrumb">
+ 			 <li><a href="{% url 'index' %}">Inicio</a></li>
+ 			<li class="active" href="#"> Lista de Cátedras  </li>
+	</ol>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	 <div class="row-fluid">  
+  	 	<div class="col-lg-4 control-group">
+  		 	<div class="panel panel-default">
+  				<div class="panel-heading"> Ingeniería en Sistemas </div>
+  				<div class="panel-body">	
+  					<ul class="nav nav-pills nav-stacked">  					
+						{% for sistema in sistemas %}
+		    					<a class="list-group-item" href="{% url 'catedra_delete' sistema.id %}">
+	 					 		<h4 class="list-group-item-heading"> <small>{{ sistema.nombre }} </small> </h4>
+	 					 		<p class="list-group-item-text"> - Nivel: {{ sistema.nivel}}</p> 
+	 					 	 </a>
+	 	    				{% endfor %}
+					</ul>
+  				</div>
+			</div>
+  	 		
+		</div>
+<!--		<div class="col-lg-2 control-group">-->
+<!--			Ingeniería Civil-->
+<!--			<ul class="list-group">-->
+<!--		    		{% for civ in civil %}-->
+<!--	 	 		 	<a class="list-group-item"href="{% url 'catedra_edit' civ.id %}">-->
+<!--	 			 		<h4 class="list-group-item-heading">{{ civ.nombre }} </h4>-->
+<!--	 			 		<p class="list-group-item-text"> Carrera: {{ civ.carrera}} - Nivel: {{ civ.nivel}}</p> -->
+<!--	 			 	 </a>-->
+<!--	 	    		{% endfor %}-->
+<!--			</ul>-->
+<!--		</div>-->
+<!--		<div class="col-lg-2 control-group">-->
+<!--			Ingeniería Mecánica-->
+<!--			<ul class="list-group">-->
+<!--		    		{% for mec in mecanica %}-->
+<!--	 	 		 	<a class="list-group-item"href="{% url 'catedra_edit' mec.id %}">-->
+<!--	 			 		<h4 class="list-group-item-heading">{{ mec.nombre }} </h4>-->
+<!--	 			 		<p class="list-group-item-text"> Carrera: {{ mec.carrera}} - Nivel: {{ mec.nivel}}</p> -->
+<!--	 			 	 </a>-->
+<!--	 	    		{% endfor %}-->
+<!--			</ul>-->
+<!--		</div>-->
+<!--		<div class="col-lg-2 control-group">-->
+<!--			Ingeniería Química-->
+<!--			<ul class="list-group">-->
+<!--		    		{% for qui in quimica %}-->
+<!--	 	 		 	<a class="list-group-item"href="{% url 'catedra_edit' qui.id %}">-->
+<!--	 			 		<h4 class="list-group-item-heading">{{ qui.nombre }} </h4>-->
+<!--	 			 		<p class="list-group-item-text"> Carrera: {{ qui.carrera}} - Nivel: {{ qui.nivel}}</p> -->
+<!--	 			 	 </a>-->
+<!--	 	    		{% endfor %}-->
+<!--			</ul>-->
+<!--		</div>-->
+<!--		<div class="col-lg-2 control-group">-->
+<!--			Ingeniería Eléctrica-->
+<!--			<ul class="list-group">-->
+<!--		    		{% for ele in electrica %}-->
+<!--	 	 		 	<a class="list-group-item"href="{% url 'catedra_edit' ele.id %}">-->
+<!--	 			 		<h4 class="list-group-item-heading">{{ ele.nombre }} </h4>-->
+<!--	 			 		<p class="list-group-item-text"> Carrera: {{ ele.carrera}} - Nivel: {{ ele.nivel}}</p> -->
+<!--	 			 	 </a>-->
+<!--	 	    		{% endfor %}-->
+<!--			</ul>-->
+<!--		</div>-->
+<!--		<div class="col-lg-2 control-group">-->
+<!--			Ingeniería Industrial-->
+<!--			<ul class="list-group">-->
+<!--		    		{% for ind in industrial %}-->
+<!--	 	 		 	<a class="list-group-item"href="{% url 'catedra_edit' ind.id %}">-->
+<!--	 			 		<h4 class="list-group-item-heading">{{ ind.nombre }} </h4>-->
+<!--	 			 		<p class="list-group-item-text"> Carrera: {{ ind.carrera}} - Nivel: {{ ind.nivel}}</p> -->
+<!--	 			 	 </a>-->
+<!--	 	    		{% endfor %}-->
+<!--			</ul>-->
+<!--		</div>-->
+	</div>
+		
+		
+</div>
+
+{% endblock %}

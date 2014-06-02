@@ -1,0 +1,101 @@
+#-*-encoding:utf-8
+# Views for Alumno 
+from student.main_alumno.models import Alumno
+from student.main_alumno.forms import AlumnoForm
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404,render,render_to_response, redirect
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib import messages
+from django.template.context import RequestContext
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+             		  
+#GESTION DE ALUMNOS
+@permission_required('GenericUser.can_add', raise_exception=True)
+@login_required(login_url='/login/')	
+def add_alumno(request):
+	form = AlumnoForm(request.POST or None)
+	if form.is_valid():
+		new_alumno = form.save()
+		messages.success(request, 'Alumno añadido satisfactoriamente')
+		url = reverse('alumnos:alumno_details', args=[new_alumno.id])
+		return redirect(url)
+	template_vars = {'form': form}
+	return render_to_response('add_alumno.html', template_vars, context_instance=RequestContext(request))
+
+@permission_required('empleados.can_add', raise_exception=True)	
+@login_required(login_url='/login/')
+def edit_alumno(request, id):
+	alumno = get_object_or_404(Alumno, id=id)
+	form = AlumnoForm(request.POST or None , instance=alumno)
+	if form.is_valid():
+			form.save()
+			messages.success(request,'Datos del alumno modificados satisfactoriamente')
+			url = reverse('alumnos:alumno_details', args=[alumno.id])
+			return redirect(url)
+	template_vars = {'form': form}
+	return render_to_response('edit_alumno.html', template_vars, context_instance=RequestContext(request))
+
+@permission_required('empleados.can_delete', raise_exception=True)
+@login_required(login_url='/login/')	
+def delete_alumno(request,id):
+	alumno = get_object_or_404(Alumno, id=id)
+	carrera = alumno.carrera
+	alumno.delete()
+	messages.success(request,'Alumno dado de baja satisfactoriamente')
+	url = reverse('alumnos:alumno_by_career' ,args=[carrera])
+	return redirect(url) 
+
+# LISTING VIEWS	
+@login_required(login_url='/login/')
+def ListaAlumnos(request):
+	alumnos = Alumno.objects.all()
+	paginator = Paginator(alumnos,1)
+	page = request.GET.get('page')
+	try:
+		alumnos = paginator.page(page)
+	except PageNotAnInteger:
+		alumnos = paginator.page(1)
+	except EmptyPage:
+		alumnos = paginator.page(paginator.num_pages)
+	template_vars ={'alumnos':alumnos}
+	return render_to_response('alumno_list.html', template_vars, context_instance=RequestContext(request))
+	
+@login_required(login_url='/login/')
+def alumno_by_career(request, career):
+	#Para instanciar la tabla necesito un queryset
+	alumnos = Alumno.objects.filter(carrera__nombre__contains=career)
+	paginator = Paginator(alumnos, 25) # Mostrar 25 alumnos por página
+	page = request.GET.get('page')
+	try:
+        	alumnos = paginator.page(page)
+    	except PageNotAnInteger:
+        	# If page is not an integer, deliver first page.
+        	alumnos = paginator.page(1)
+    	except EmptyPage:
+        	# If page is out of range (e.g. 9999), deliver last page of results.
+        	alumnos = paginator.page(paginator.num_pages)
+	template_vars = {'alumnos': alumnos}
+	return render_to_response ('alumno_by_career.html', template_vars, context_instance=RequestContext(request))
+
+@login_required(login_url='/login/')
+def alumno_details(request,id):
+	alumno = get_object_or_404(Alumno, id=id)
+	return render_to_response ('alumno_details.html', {'alumno': alumno}, context_instance=RequestContext(request))
+	
+#SEARCH VIEWS
+@login_required(login_url='/login/')
+def search_alumno(request):
+	return render_to_response('search_alumno.html', context_instance=RequestContext(request))
+	
+@login_required(login_url='/login/')
+def search_results(request):
+	query = request.GET['lega']
+	try:
+    		alumno = Alumno.objects.get(legajo=query)
+	except Alumno.DoesNotExist:
+    		alumno = None
+    		messages.error(request,'No hay resultados')
+	template_vars = {'alumno': alumno}
+	return render_to_response('search_results.html', template_vars, context_instance=RequestContext(request))

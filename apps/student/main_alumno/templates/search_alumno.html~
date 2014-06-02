@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Buscar alumno  {% endblock %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/formcrispy.css' /> {% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+	   <div class="row-fluid">  	 
+		<div class="well clearfix" style="border-radius:5%;">
+			<form class="navbar-form navbar-left"  action="{% url alumnos:search_results %}"role="search">
+				<fieldset>
+					<legend> Ingrese el legajo del alumno </legend>
+   				 	<div class="form-group">
+        					<input type="text" class="form-control" name="lega" placeholder="Buscar">
+    					</div>
+    					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+    				</fieldset>
+			</form>
+		</div>
+	   </div>
+	</div>
+{% endblock%}

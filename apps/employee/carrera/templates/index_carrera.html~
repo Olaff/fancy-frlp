@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} AlumnosWeb {% endblock %}
+{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/multidropdown.css' />
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/fixcolumn.css' /> 
+{% endblock %}
+
+{% block content %}
+	    <!-- Main jumbotron  -->
+    <div class="jumbotron">
+      <div class="container">
+        <h2> Gestión de Carreras </h2>
+        <p> Cada sección representa una tarea que podés hacer sobre las carreras </p>
+        <p><a class="btn btn-primary btn-lg" role="button"> Novedades &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-sm-3 fourth-column">
+          <h2>Agregar una nueva carrera</h2>
+          <p class="text-justify"> Si se abrió una nueva carrera en la facultad, pinchá en el siguiente botón</p>
+          <p><a class="btn btn-default" href="{% url 'carreras:add_carrera' %}" role="button"> Ir &raquo;</a></p>
+        </div>
+        <div class="col-sm-3 fourth-column">
+          <h2>Ver Carreras </h2>
+          <p class="text-justify"> Pinchando en el siguiente botón, vas a poder ver una lista con todas las carreras guardadas en el sistema</p>
+          <p><a class="btn btn-default" href="{% url 'carreras:carrera_list' %}" role="button"> Ir &raquo;</a></p>
+       </div>
+        
+      </div>
+      
+
+      <hr>
+   </div> <!-- /container -->
+{% endblock%}

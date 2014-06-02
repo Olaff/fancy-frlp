@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Eliminar Cátedra {% endblock %}
+
+{% block header %}
+	Seleccione cátedra a eliminar 
+{% endblock %}
+{% block content %}
+	<ul>
+    		{% for catedra in catedras %}
+ 	       		<li><a href="{% url 'catedra_delete' catedra.id %}">{{ catedra.nombre }}</a> - Carrera: {{ catedra.carrera}} - Nivel: {{catedra.nivel}} - </li>
+    		{% endfor %}
+	</ul>
+{% endblock %}

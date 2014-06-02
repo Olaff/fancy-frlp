@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de cátedras {% endblock %}
+	{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' media="screen" /> 
+	{% endblock %}
+
+
+{% block header %}
+	{% block alertmessage %}
+	{% if messages %}     				
+            			{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+              				<div class="container">
+            					<div class="col-sm-12 pull-left">
+              						<div class="alert alert-info dismissable">
+              							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    								<span class="text-center"><strong>{{ message }}  </strong> </span>
+    							</div>
+    						</div>
+    					</div>
+           			 {% endfor %} 
+	 {% endif %}
+	{% endblock %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  	 <div class="row-fluid">  
+  	 	<div class="col-sm-12">
+  		 	{% regroup catedras|dictsort:"nivel" by nivel as catedras_list%}
+  	 		{% for catedra in catedras_list %}
+  	 			<div class="col-sm-6 panel-group">
+  	 	 			<div class="panel panel-primary">
+  		 				<div class="panel-heading">
+  		 					 <h4 class="panel-title">Catedras de {{ catedra.grouper }}º nivel </h4></div>
+  		 				<div class="panel-body">	
+  		 					<ul class="list-group"> 
+  		 						{% for item in catedra.list|dictsort:"electiva" %}
+  		 							<!-- Delete Catedra  MODAL-->
+            								<div id="{{item.id}}" class="modal fade" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+            								  <div class="modal-dialog modal-sm">
+            								  	<div class="modal-content">
+            									 <div class="modal-header">
+              										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              										<h4 id="myModalLabel">Eliminar Cátedra</h4>
+            									 </div>
+            									 <div class="modal-body">
+             										<p>¿Estás seguro que deseas eliminar la cátedra de  <i class="text-warning">{{ item.nombre }} ?</i></p>
+            									 </div>
+            									 <div class="modal-footer">
+              										<button class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+              										<a class="btn btn-danger btn-sm" href="{% url 'catedras:catedra_delete' item.slug %}" data-toggle="modal">
+              										<i class="icon-trash icon-white"></i> Eliminar</a>
+            									 </div>
+            									</div>
+            								  </div>
+           								</div>
+           								<!-- Delete Catedra Modal -->
+           								
+           								<div class="list-group-item">
+  		 								<a name="catedra_details" class="list-group-item-heading " href="{{item.get_absolute_url}}">  
+  		 									{{item.nombre }} {% if item.electiva %}  < {% endif %}
+  		 								</a>
+  		 								<div class="pull-right">
+  		 								   <a  class="btn btn-default btn-xs" href="{% url 'catedras:catedra_edit' item.slug %}"><i class="icon-pencil"></i> </a>
+  		 								   {% if item.electiva %}
+  		 								   	<a class="btn btn-info btn-xs"> Electiva </a>
+										        <button name="delete" type="button" data-toggle="modal" data-target="#{{item.id}}" class="btn btn-danger btn-xs" /><i class="icon-trash icon-white"></i>
+										   {% endif %}
+	 									</div>
+	 								</div>
+          	 						{% endfor %}
+  		 					</ul>
+  		 				</div>
+  		 			</div>
+  		 		</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block customjs %} 
+
+ {% endblock%}
+
+
+  		  
+  		 	 
+  				
+  					
+  						
+	 				
+	 				
+  				
+		 
+	

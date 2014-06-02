@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} AlumnosWeb {% endblock %}
+{% block customcss %}
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/multidropdown.css' />
+	<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/fixcolumn.css' /> 
+{% endblock %}
+{% block header %}
+	{% block navigation%}
+		<nav class="navbar navbar-default navbar-fixed-top"></nav>
+	{% endblock %}
+{% endblock%}
+
+{% block content %}
+	    <!-- Main jumbotron -->
+ <div class="jumbotron">
+    <div class="container">
+ 	<h2> Bienvenido</h2>
+ 	<p></p>
+     </div>
+  </div>
+          
+  <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-sm-3 fourth-column">
+        	<h2> Entrar como Administrador</h2>
+        	<p><em><small></small></em></p>
+        	<p><a class="btn btn-default" role="button" href="{% url 'users:employee_login'%}"> Ir &raquo;</a></p>
+        </div>
+        <div class="col-sm-3 fourth-column">
+        	<h2> Entrar como alumno </h2>
+        	<p class="text-justify"> </p>
+        	<p><a class="btn btn-default" href="{% url 'users:student_login' %}" role="button"> Ir &raquo;</a></p>
+        </div>
+      </div>
+      
+  </div> <!-- /container -->
+{% endblock%}

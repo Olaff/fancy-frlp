@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %} Detalles de Alumno {% endblock %}
+{% block customcss %}<link rel='stylesheet' type="text/css" href='{{STATIC_URL}}css/texteffects.css' > {% endblock %}
+
+{% block header %}
+	{% for message in messages %}  <!-- Para mostrar mensajes al usuario -->
+        	<div class="container">
+        		<div class="col-sm-12 pull-left">
+        			<div class="alert alert-info dismissable">
+        				<button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;</button>
+    					<span class="text-center"><strong>{{ message }}  </strong> </span>
+    				</div>
+    			</div>
+    		</div>
+        {% endfor %} 
+{% endblock %}
+
+{% block content %}
+	<div class="page-header" >
+  		<h1 class="main-title" style="margin-left: 10px;">
+  			Detalle del alumno
+	  	</h1>
+	</div>
+	<div class="container"> 
+		<div class="row-fluid">
+			<div class="col-lg-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"><h4 class="panel-title text-center">Datos personales</h4> </div>
+					<div class="panel-body">
+						<dl class="dl-horizontal">
+							  <dt> Apellido:</dt>
+							  <dd>{{alumno.apellido|title}}</dd>
+							  <dt> Nombres: </dt>
+							  <dd>{{alumno.nombres|title}} </dd>		
+							  <dt> Fecha de Nacimiento: </dt>
+							  <dd>{{alumno.fecha_nacimiento|date:"d/m/Y" }}</dd>
+							  <dt>Lugar: </dt>
+							  <dd>{{alumno.lugar}}</dd>
+							  <dt> DNI: </dt>
+							  <dd>{{alumno.dni}}</dd>
+							  <dt> Domicilio </dt>
+							  <dd>{{alumno.domicilio }}</dd>
+							  <dt> Localidad:  </dt>
+							  <dd>{{alumno.localidad}}</dd>
+							  <dt> Teléfono: </dt>
+							  <dd>{{alumno.telefono}}</dd>
+							  <dt> Celular: </dt>
+							  <dd>{{alumno.celular}}</dt>
+							  <dt> Email </dt>
+							  <dd>{{alumno.mail}}</dd>
+   						</dl>
+					</div>
+					<div class="panel-footer">
+						<a href="#" class="list-group-item"> 
+							<strong> Sitio web: </strong>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading"><h4 class="text-center">Información UTN </h4> </div>
+					<div class="panel-body">
+						<dl class="dl-horizontal">
+							<dt> Legajo: </dt>
+							<dd>{{alumno.legajo}}</dd>
+							<dt> Carrera: </dt>
+							<dd>{{alumno.carrera.get_title}}</dd>
+						</dl>
+				</div>
+					<div class="panel-footer">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

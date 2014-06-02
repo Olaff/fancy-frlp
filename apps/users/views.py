@@ -7,7 +7,13 @@ from django.contrib.auth import login as django_login, logout as django_logout, 
 from apps.users.forms import EmployeeAuthenticationForm, StudentAuthenticationForm
 from django.contrib import messages
 
-def login(request):
+#LANDING PAGE
+def landing(request):
+	return render_to_response('landing_page.html', context_instance=RequestContext(request))
+
+#EMPLOYEE VIEWS
+
+def employee_login(request):
 	'''
 	Employee Log in view
 	'''
@@ -17,10 +23,14 @@ def login(request):
 		if user is not None:
 			if user.is_active:
 				django_login(request, user)
-				return redirect('users:index')
+				return redirect('users:employee_index')
 	template_vars = {'form': form}
-	return render_to_response('login.html', template_vars, context_instance=RequestContext(request))
+	return render_to_response('employee_login.html', template_vars, context_instance=RequestContext(request))
+	
+def employee_index(request):
+	return render_to_response('employee_index.html', context_instance=RequestContext(request))
 
+#STUDENT VIEWS 
 def student_login(request):
 	'''
 	Student Log in view
@@ -35,15 +45,17 @@ def student_login(request):
 	template_vars = {'student_form': student_form}
 	return render_to_response('student_login.html', template_vars, context_instance=RequestContext(request))  
 
+def student_index(request):
+	return render_to_response('student_index.html', context_instance=RequestContext(request))
+
 def logout(request):
     """
     Log out view
     """
     django_logout(request)
     messages.success(request,'Has cerrado sesión')
-    return redirect('users:login')
+    return redirect('/')
     
-def index(request):
-	return render_to_response('index.html', context_instance=RequestContext(request))
+
 
 
